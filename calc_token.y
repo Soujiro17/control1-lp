@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 int yylex();
+
 void yyerror(const char *s){
   fprintf(stderr, "%s\n", s);
 }
@@ -9,7 +10,7 @@ void yyerror(const char *s){
 
 %union{
   int num;
-  char *str;
+  char * str;
 }
 
 %type<str> statement estados
@@ -20,17 +21,17 @@ void yyerror(const char *s){
 
 %%
 
-statement: NOMBRE '=' estados | INICIAL '=' ESTADO { printf("STRING: %c\n", $3); };
+statement: NOMBRE '=' estados
+        | INICIAL '=' ESTADO { printf("STRING: %s\n", $3); }
+        ;
 
-estados: '{' ESTADO '}' | '{' ESTADO ',' estados '}' { };
+estados: '{' ESTADO '}'
+        | '{' ESTADO ',' estados '}' { }
+        ;
 
 %%
 
 int main(int argc, char **argv){
-  int val;
-
-  while(val = yyparse()){
-  }
-
+  yyparse();
   return 0;
 }

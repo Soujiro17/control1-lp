@@ -5,8 +5,8 @@
 // extern int yylval;
 // [{}(),=] { return *yytext; }
 
-
 %}
+
 
 %option noinput nounput
 
@@ -18,7 +18,7 @@ ESTADOS_FINALES { return NOMBRE; }
 ESTADO_INICIAL { return INICIAL; }
 & { return TRANSICION; }
 [{}(),=] { return *yytext; }
-q[0-9]+ { return ESTADO; }
+q[0-9]+ { yylval.str = yytext; return ESTADO; }
 \n { }
 [ \t] { }
 . { }
