@@ -20,7 +20,7 @@ void yyerror(const char *s){
 
 %%
 
-statement: NOMBRE '=' estados | INICIAL '=' ESTADO { printf("STRING: %s\n", $3); };
+statement: NOMBRE '=' estados | INICIAL '=' ESTADO { printf("STRING: %c\n", $3); };
 
 estados: '{' ESTADO '}' | '{' ESTADO ',' estados '}' { };
 
