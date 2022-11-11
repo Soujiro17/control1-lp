@@ -1,10 +1,5 @@
-/* Libro pagina 13*/
 %{
 #include "calc_token.tab.h"
-
-// extern int yylval;
-// [{}(),=] { return *yytext; }
-
 %}
 
 
@@ -12,14 +7,14 @@
 
 %% 
 
-ESTADOS { return NOMBRE; }
-ALFABETO { return NOMBRE; }
-ESTADOS_FINALES { return NOMBRE; }
-ESTADO_INICIAL { return INICIAL; }
+E { return ESTADOS; }
+A { return ALFABETO; }
+EF { return FINAL; }
+EI { return INICIAL; }
 & { return TRANSICION; }
 [{}(),=] { return *yytext; }
 q[0-9]+ { yylval.str = yytext; return ESTADO; }
-\n { }
+\n { return ENDLINE; }
 [ \t] { }
 . { }
 
