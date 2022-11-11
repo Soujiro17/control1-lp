@@ -34,6 +34,10 @@ bool isOnArray(char value[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]){
   return false;
 }
 
+bool evaluarCadena(char cadena){
+  
+}
+
 %}
 
 %union{
