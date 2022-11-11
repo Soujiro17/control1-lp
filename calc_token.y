@@ -41,7 +41,7 @@ bool isValidState(char estado[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]
 %type<str> statement estados
 
 %token<str> ESTADOS INICIAL FINAL ALFABETO
-%token<str> ESTADO
+%token<str> ESTADO VALUE
 %token<str> TRANSICION
 %token ENDLINE
 
@@ -86,13 +86,12 @@ statement: ESTADOS '=' estados {
         token = strtok(NULL, ",");
       }
   }
+  | TRANSICION '=' estados '=' VALUE { printf("Estados: %s Value: %s\n", $3, $5); }
   ;
 
 estados: ESTADO
   | estados ',' estados
   ;
-
-transicion: TRANSICION ESTADO ","
 
 %%
 
