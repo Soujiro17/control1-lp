@@ -12,24 +12,27 @@ void yyerror(const char *s){
   fprintf(stderr, "%s\n", s);
 }
 
+int contador_transiciones = 0;
+
 struct DFA{
+  char alfabeto[MAX_ESTADOS][MAX_ESTADOS];
   char estados[MAX_ESTADOS][MAX_ESTADOS];
   char estado_inicial[10];
   char estados_finales[MAX_ESTADOS][MAX_ESTADOS];
+  char transiciones[MAX_ESTADOS][MAX_ESTADOS];
 };
 
 struct DFA dfa;
 
-bool isValidState(char estado[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]){
+bool isOnArray(char value[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]){
   int i;
   for(i = 0; i<MAX_ESTADOS; i++){
-    if(strcmp(array[i], estado) == 0){
+    if(strcmp(array[i], value) == 0){
       return true;
     }
   }
   return false;
 }
-
 
 %}
 
@@ -38,7 +41,7 @@ bool isValidState(char estado[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]
   char * str;
 }
 
-%type<str> statement estados
+%type<str> statement estados valores
 
 %token<str> ESTADOS INICIAL FINAL ALFABETO
 %token<str> ESTADO VALUE
@@ -65,7 +68,7 @@ statement: ESTADOS '=' estados {
       }
     }
   | INICIAL '=' ESTADO {
-      if(isValidState($3, dfa.estados) == false){
+      if(isOnArray($3, dfa.estados) == false){
         printf("Error al agregar el estado final: no se encuentra dentro de los estados definidos.");
         exit(1);
       }
@@ -76,7 +79,7 @@ statement: ESTADOS '=' estados {
       int count = 0;
       while( token != NULL ) {
 
-        if(isValidState(token, dfa.estados) == false){
+        if(isOnArray(token, dfa.estados) == false){
           printf("Error al agregar el estado final: no se encuentra dentro de los estados definidos.");
           exit(1);
         }
@@ -85,13 +88,26 @@ statement: ESTADOS '=' estados {
         count++;
         token = strtok(NULL, ",");
       }
-  }
-  | TRANSICION '=' estados '=' VALUE { printf("Estados: %s Value: %s\n", $3, $5); }
+    }
+  | TRANSICION '=' estados '=' VALUE { 
+      strcpy(dfa.transiciones[contador_transiciones], $3);
+    }
+  | ALFABETO '=' valores { 
+      char *token = strtok($3, ",");
+      int count = 0;
+      while( token != NULL ) {
+        strcpy(dfa.alfabeto[count], token);
+        count++;
+        token = strtok(NULL, ",");
+      }
+    }
   ;
 
 estados: ESTADO
   | estados ',' estados
   ;
+
+valores: VALUE | valores ',' valores;
 
 %%
 
