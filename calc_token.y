@@ -14,15 +14,15 @@ using namespace std;
 typedef struct Node{
         string name;
         bool isFinal = 0;
-        struct Node *zeroInput  = NULL;
-        struct Node *oneInput = NULL;
+        struct Node *nextNode = NULL;
+        string symbol;
 } State;
 
 typedef struct DFA{
-  std::vector <State> estados;
-  std::vector <string> alfabeto;
-  State estado_inicial;
-  std::vector <State> estados_finales;
+  vector <State> estados;
+  vector <string> alfabeto;
+  State *estado_inicial;
+  vector <State> estados_finales;
 } Dfa;
 
 int yylex();
@@ -33,16 +33,16 @@ void yyerror(const char *s){
 
 Dfa dfa;
 
-bool isValidNode(char nombreEstado[MAX_ESTADOS]){
-
-  string s(nombreEstado);
+State getState(string stateName){
+  State *nodoEncontrado;
 
   for(int i = 0; i<dfa.estados.size(); i++){
-    if(dfa.estados[i].name.compare(s) == 0){
-      return true;
+    if(dfa.estados[i].name.compare(stateName) == 0){
+      nodoEncontrado = &dfa.estados[i];
     }
   }
-  return false;
+
+  return &nodoEncontrado;
 }
 
 bool evaluarCadena(char cadena){
@@ -52,19 +52,19 @@ bool evaluarCadena(char cadena){
 }
 
 void dfaResume(){
-  printf("\nEstados:");
+  printf("\nEstados:\n");
   for(int i = 0; i<dfa.estados.size(); i++){
-    printf(" %s", dfa.estados[i].name.c_str());
+    if(dfa.estados[i].isFinal == 1){
+      printf("  - %s (final)\n", dfa.estados[i].name.c_str());
+    }else{
+      printf("  - %s\n", dfa.estados[i].name.c_str());
+    }
   }
-  cout << "Estado inicial: "<< dfa.estado_inicial.name.c_str() << "\n";
-  printf("Estados finales: ");
-  for(int i = 0; i<dfa.estados_finales.size(); i++){
-    printf(" %s", dfa.estados_finales[i].name.c_str());
-  }
+  printf("Estado inicial: %s", (*dfa.estado_inicial).name.c_str());
 
-  printf("Alfabeto: ");
+  printf("\nAlfabeto: ");
   for(int i = 0; i<dfa.alfabeto.size(); i++){
-    printf(" %s", dfa.alfabeto[i].c_str());
+    printf("%s ", dfa.alfabeto[i].c_str());
   }
 }
 
@@ -104,44 +104,50 @@ statement: ESTADOS '=' estados {
 
     }
   | INICIAL '=' ESTADO {
-      if(isValidNode($3) == false){
-        printf("Error al agregar el estado final: no se encuentra dentro de los estados definidos.");
-        exit(1);
-      }
-      
-      State node;
-      node.name = $3;
 
-      dfa.estado_inicial = node; 
+      for(int i = 0; i<dfa.estados.size(); i++){
+        if(strcmp(dfa.estados[i].name.c_str(), $3) == 0){
+          dfa.estado_inicial = &dfa.estados[i];
+          break;
+        }
+      }
+
     }
   | FINAL '=' estados {
       char *token = strtok($3, ",");
       while( token != NULL ) {
 
-        if(isValidNode(token) == false){
-          printf("Error al agregar el estado final: no se encuentra dentro de los estados definidos.");
-          exit(1);
+        for(int i=0; i<dfa.estados.size(); i++){
+          if(strcmp(dfa.estados[i].name.c_str(), token) == 0){
+            dfa.estados[i].isFinal = 1;
+          }
         }
 
-        State node;
-        node.name = token;
-        dfa.estados_finales.push_back(node);
         token = strtok(NULL, ",");
       }
 
     }
   | TRANSICION '=' estados '=' VALUE {
 
-      printf("%s %s", $3, $5);
+      string nodos($3);
+      string transicion($5);
+      string nodo1 = nodos.substr(0, 2);
+      string nodo2 = nodos.substr(3, 2);
 
-      // string s($3);
-      // s.replace(5, 2, "");
-      // string s2($5);
-      // printf("%s %s", s.c_str(), s2.c_str());
+      State nodoEncontrado = getState(nodo1);
+      
+      printf("%s - %s - %s", nodo1.c_str(), nodo2.c_str(), transicion.c_str());
 
-      // char *token = strtok(str, ",");
+      for(int i = 0; i<dfa.estados.size(); i++){
+        if(dfa.estados[i].name.compare())
+      }
+      // char *token = strtok(nodos, ",");
       // while( token != NULL ) {
+      //   // State nodo;
+      //   // nodo.name = token;
+      //   // dfa.estados.push_back(nodo);
       //   printf("%s", token);
+      //   token = strtok(NULL, ",");
       // }
     }
   | ALFABETO '=' valores {
