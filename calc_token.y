@@ -1,10 +1,29 @@
 %{
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <string.h>
+// #include <stdbool.h>
+// #include <stdlib.h>
+
+#include <iostream>
+#include <vector>
+#include <cstring>
+using namespace std;
 
 #define MAX_ESTADOS 10
+
+typedef struct Node{
+        string name;
+        bool isFinal = 0;
+        struct Node *zeroInput  = NULL;
+        struct Node *oneInput = NULL;
+} State;
+
+typedef struct DFA{
+  std::vector <State> estados;
+  std::vector <string> alfabeto;
+  State estado_inicial;
+  std::vector <State> estados_finales;
+} Dfa;
 
 int yylex();
 
@@ -12,22 +31,14 @@ void yyerror(const char *s){
   fprintf(stderr, "%s\n", s);
 }
 
-int contador_transiciones = 0;
+Dfa dfa;
 
-struct DFA{
-  char alfabeto[MAX_ESTADOS][MAX_ESTADOS];
-  char estados[MAX_ESTADOS][MAX_ESTADOS];
-  char estado_inicial[10];
-  char estados_finales[MAX_ESTADOS][MAX_ESTADOS];
-  char transiciones[MAX_ESTADOS][MAX_ESTADOS];
-};
+bool isValidNode(char nombreEstado[MAX_ESTADOS]){
 
-struct DFA dfa;
+  string s(nombreEstado);
 
-bool isOnArray(char value[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]){
-  int i;
-  for(i = 0; i<MAX_ESTADOS; i++){
-    if(strcmp(array[i], value) == 0){
+  for(int i = 0; i<dfa.estados.size(); i++){
+    if(dfa.estados[i].name.compare(s) == 0){
       return true;
     }
   }
@@ -35,7 +46,26 @@ bool isOnArray(char value[MAX_ESTADOS], char array[MAX_ESTADOS][MAX_ESTADOS]){
 }
 
 bool evaluarCadena(char cadena){
-  
+  printf("Se encuentra");
+  printf("No se encuentra");
+  return true;
+}
+
+void dfaResume(){
+  printf("\nEstados:");
+  for(int i = 0; i<dfa.estados.size(); i++){
+    printf(" %s", dfa.estados[i].name.c_str());
+  }
+  cout << "Estado inicial: "<< dfa.estado_inicial.name.c_str() << "\n";
+  printf("Estados finales: ");
+  for(int i = 0; i<dfa.estados_finales.size(); i++){
+    printf(" %s", dfa.estados_finales[i].name.c_str());
+  }
+
+  printf("Alfabeto: ");
+  for(int i = 0; i<dfa.alfabeto.size(); i++){
+    printf(" %s", dfa.alfabeto[i].c_str());
+  }
 }
 
 %}
@@ -45,10 +75,10 @@ bool evaluarCadena(char cadena){
   char * str;
 }
 
-%type<str> statement estados valores
+%type<str> statement estados valores cadena
 
 %token<str> ESTADOS INICIAL FINAL ALFABETO
-%token<str> ESTADO VALUE
+%token<str> ESTADO VALUE EVALUAR CADENA
 %token<str> TRANSICION
 %token ENDLINE
 
@@ -64,46 +94,65 @@ linea: ENDLINE
 
 statement: ESTADOS '=' estados {
       char *token = strtok($3, ",");
-      int count = 0;
+
       while( token != NULL ) {
-        strcpy(dfa.estados[count], token);
-        count++;
+        State nodo;
+        nodo.name = token;
+        dfa.estados.push_back(nodo);
         token = strtok(NULL, ",");
       }
+
     }
   | INICIAL '=' ESTADO {
-      if(isOnArray($3, dfa.estados) == false){
+      if(isValidNode($3) == false){
         printf("Error al agregar el estado final: no se encuentra dentro de los estados definidos.");
         exit(1);
       }
-      strcpy(dfa.estado_inicial, $3); 
+      
+      State node;
+      node.name = $3;
+
+      dfa.estado_inicial = node; 
     }
   | FINAL '=' estados {
       char *token = strtok($3, ",");
-      int count = 0;
       while( token != NULL ) {
 
-        if(isOnArray(token, dfa.estados) == false){
+        if(isValidNode(token) == false){
           printf("Error al agregar el estado final: no se encuentra dentro de los estados definidos.");
           exit(1);
         }
 
-        strcpy(dfa.estados_finales[count], token);
-        count++;
+        State node;
+        node.name = token;
+        dfa.estados_finales.push_back(node);
         token = strtok(NULL, ",");
       }
+
     }
-  | TRANSICION '=' estados '=' VALUE { 
-      strcpy(dfa.transiciones[contador_transiciones], $3);
+  | TRANSICION '=' estados '=' VALUE {
+
+      printf("%s %s", $3, $5);
+
+      // string s($3);
+      // s.replace(5, 2, "");
+      // string s2($5);
+      // printf("%s %s", s.c_str(), s2.c_str());
+
+      // char *token = strtok(str, ",");
+      // while( token != NULL ) {
+      //   printf("%s", token);
+      // }
     }
-  | ALFABETO '=' valores { 
+  | ALFABETO '=' valores {
       char *token = strtok($3, ",");
-      int count = 0;
       while( token != NULL ) {
-        strcpy(dfa.alfabeto[count], token);
-        count++;
+        string s(token);
+        dfa.alfabeto.push_back(s);
         token = strtok(NULL, ",");
       }
+
+      dfaResume();
     }
   ;
 
@@ -112,6 +161,10 @@ estados: ESTADO
   ;
 
 valores: VALUE | valores ',' valores;
+
+cadena: valores | valores cadena
+
+evaluar: EVALUAR '(' cadena ')' { evaluarCadena($3); };
 
 %%
 

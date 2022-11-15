@@ -13,6 +13,7 @@ EF { return FINAL; }
 EI { return INICIAL; }
 T { return TRANSICION; }
 [{}(),=] { return *yytext; }
+evaluar { return EVALUAR; }
 q[0-9]+ { yylval.str = yytext; return ESTADO; }
 \n { return ENDLINE; }
 [ \t] { }
