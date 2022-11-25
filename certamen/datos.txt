@@ -1,0 +1,16 @@
+//     B = 0.2; // tasa de infeccion
+//     A = 2000; //tasa de reclutamiento
+//     a1 = 2; // tasa de morbilidad
+//     a2 = 0.8; // tasa de recuperacion
+//     p = 0.8; // tasa de perdidad de inmunidad
+//     u = 0.00; // tasa de mortalidad por causas distintas
+//     g = 0.03; // tasa de mortalidad por la enfermedad
+
+//     /*
+//     r = 100; // numero de contactos por unidad de tiempo
+//     y = 0.9; // el ratio de recuperacion de la gente, va entre 0 y 1
+//     e = 0.7; // el ratio de progresion al estado infeccioso per capita
+//     */
+
+
+TI TR TB TREC TPI TMCD TME

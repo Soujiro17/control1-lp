@@ -1,2 +1,0 @@
-  | TRANSICION "(" estado "," LETRA ")" "=" estado
-  | TRANSICION "(" estado "," NUMERO ")" "=" estado
