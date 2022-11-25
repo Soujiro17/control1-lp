@@ -9,22 +9,25 @@
 
 using namespace std;
 
-float t_mortalidad;
-float t_morbilidad;
-float t_transmision;
-float t_recuperacion;
-float t_reclutamiento;
-float t_perdida_inmunidad;
-float t_mortalidad_enfermedades;
+float t_mortalidad = 0.03;
+float t_morbilidad = 2;
+float t_transmision = 0.2;
+float t_recuperacion = 0.8;
+float t_reclutamiento = 0.3;
+float t_perdida_inmunidad = 0.8;
+float t_mortalidad_enfermedades = 0.03;
 
-float r;
-float e;
-float y;
+float r = 100;
+float e = 0.7;
+float y = 0.9;
+
+long filas = 3;
+int columnas = 3;
+int ciclo = 5;
 
 class area
 {
 public:
-    long ciclo;
     long expuestos;
     long infectados;
     long recuperados;
@@ -32,7 +35,8 @@ public:
     vector<int> foto;
     long total_muertos;
     long total_poblacion;
-    long total_poblacion_anterior; 
+    long total_poblacion_anterior;
+
     vector<vector<int>> calendario;
 
     area(int inf, int suc, int exps, int recup)
@@ -46,12 +50,39 @@ public:
         total_muertos = 0;
     }
 
+    area()
+    {
+        infectados = 10000;
+        suceptibles = 100000;
+        expuestos = 0;
+        recuperados = 0;
+        total_poblacion = infectados + suceptibles + expuestos + recuperados;
+        total_poblacion_anterior = total_poblacion; 
+        total_muertos = 0;
+    }
+
     // Setter
     void set_total_poblacion()
     {
       total_poblacion = infectados + suceptibles + expuestos + recuperados;
     }
 
+    void set_infectados(int infectadosNuevo){
+      infectados = infectadosNuevo;
+    }
+
+    void set_suceptibles(int suceptiblesNuevo){
+      suceptibles = suceptiblesNuevo;
+    }
+
+    void set_expuestos(int expuestosNuevo){
+      expuestos = expuestosNuevo;
+    }
+
+    void set_recuperados(int recuperadosNuevo){
+      recuperados = recuperadosNuevo;
+    }
+    
     void set_total_poblacion_prev(){
       total_poblacion_anterior = total_poblacion; 
     }
@@ -81,45 +112,20 @@ public:
       return tasa_cambio_R;
     }
 
-    // calcular total poblacion
-    // variacion datos
     void avance_enfermedad()
     {
-        /*
-        int expuestos_nuevos = suceptibles * t_transmision;
-        int infectados_nuevos = expuestos * t_morbilidad;
-        int recuperados_nuevos = infectados * t_recuperacion;
-        int suceptibles_nuevos = (recuperados * t_perdida_inmunidad) + (t_reclutamiento * total_poblacion);
-
-        int expuestos_muertos = expuestos * t_mortalidad;
-        int infectados_muertos = (infectados * t_mortalidad) + (infectados * t_mortalidad_enfermedades);
-        int recuperados_muertos = recuperados * t_mortalidad;
-        int suceptibles_muertos = suceptibles * t_mortalidad;
-
-        total_muertos = expuestos_muertos + infectados_muertos + recuperados_muertos + suceptibles_muertos + total_muertos;
-        */
-     
         long expuestos_aux = expuestos ;
         long infectados_aux = infectados ;
         long recuperados_aux = recuperados ;
         long suceptibles_aux = suceptibles ;
-         cout << "Ciclo numero: " << ciclo << endl;
-        cout << "expuestos: " << expuestos << endl;
-        cout << "infectados: " << infectados << endl;
-        cout << "suceptibles: " << suceptibles << endl;
-        cout << "recuperados: " << recuperados << endl;
-        cout << "total de muertos: " << total_muertos << endl;
-        cout << "poblacion total: " << total_poblacion<<endl;
-        cout << ":::::::::::::::::::::::::::::" << endl;
+
+        printf("E:%li,I:%li,S:%li,R:%li,TM:%li,PT:%li", expuestos, infectados, suceptibles, recuperados, total_muertos, total_poblacion);
+
         expuestos = expuestos_aux + tasa_cambio_expuesto(suceptibles_aux,expuestos_aux);
         infectados = infectados_aux + tasa_cambio_infectado(expuestos_aux,infectados_aux);
         recuperados = recuperados_aux + tasa_cambio_recuperados(infectados_aux,recuperados_aux);
         suceptibles = suceptibles_aux + tasa_cambio_suceptibles(recuperados_aux,suceptibles_aux);
-        cout << "tasa de suceptibles: " << tasa_cambio_suceptibles(recuperados,suceptibles_aux) << endl;
-        cout << "tasa de expuestos: " << tasa_cambio_expuesto(suceptibles,expuestos_aux) << endl;
-        cout << "tasa de infectados: " << tasa_cambio_infectado(expuestos,infectados_aux) << endl;
-        cout << "tasa de recuperados: " << tasa_cambio_recuperados(infectados,recuperados_aux) << endl;
-        cout << endl;
+
         set_total_poblacion();
         
         total_muertos = total_poblacion_anterior - total_poblacion;
@@ -128,17 +134,30 @@ public:
     }
 };
 
-
-//determinar cantidad de gente que se va de la celula
-// determinar que tipo de gente se va t_reclutamiento mover
-// deteminar que cantidad de cada tipo se movera t_reclutamiento cada celula
 void start(int infectados, int suceptibles, int expuestos, int recuperados){
-  area manhattan(infectados, suceptibles, expuestos, recuperados);
-  for (int i = 0; i < 10; i++)
-  {
-    manhattan.avance_enfermedad();
-    manhattan.set_total_poblacion();
+
+  area *areas[20][20];
+
+  for(int i = 0; i<filas; i++){
+    for(int j = 0; j<columnas; j++){
+      area nuevaArea(infectados, suceptibles,expuestos,recuperados);
+      areas[i][j] = &nuevaArea;
+    }
   }
+
+
+  for(int cic = 0; cic<ciclo; cic++){
+    printf("\n\nCiclo %i\n", cic);
+    for(int i = 0; i<filas; i++){
+      for(int j = 0; j<columnas; j++){
+        (*areas[i][j]).avance_enfermedad();
+        printf("    ||    ");
+        (*areas[i][j]).set_total_poblacion();
+      }
+      printf("\n");
+    }
+  }
+
 }
 
 int yylex();
@@ -157,7 +176,7 @@ void yyerror(const char *s){
 
 %type<str> statement
 
-%token<str> TI TR TB TREC TPI TMCD TME START
+%token<str> TI TR TB TREC TPI TMCD TME START DIAS GRILLA VALUE
 %token<num> NUM 
 %token<dec> DECIMAL
 %token ENDLINE
@@ -178,41 +197,56 @@ statement: TI '=' DECIMAL {
       printf("\nEl número debe estar entre 0 y 1\n");
       return 1;
     }
-    printf("DECIMAL: %f\n", $3); 
+    t_transmision = $3;
+    printf("Tasa de transmisión: %f\n", t_transmision); 
   }
-  | TR '=' NUM { 
-    printf("NUM: %i\n", $3); 
+  | TR '=' NUM {
+    t_reclutamiento = $3;
+    printf("Tasa de reclutamiento: %f\n", t_reclutamiento); 
   }
-  | TB '=' NUM { 
-    printf("NUM: %i\n", $3); 
+  | TB '=' NUM {
+    t_morbilidad = $3;
+    printf("Tasa de morbilidad: %f\n", t_morbilidad); 
   }
   | TREC '=' DECIMAL { 
     if($3 < 0.0 || $3 > 1.0){
       printf("\nEl número debe estar entre 0 y 1\n");
       return 1;
     }
-    printf("DECIMAL: %f\n", $3); 
+    t_recuperacion = $3;
+    printf("Tasa de recuperación: %f\n", t_recuperacion); 
   }
   | TPI '=' DECIMAL {
     if($3 < 0.0 || $3 > 1.0){
       printf("\nEl número debe estar entre 0 y 1\n");
       return 1;
     }
-    printf("DECIMAL: %f\n", $3); 
+    t_perdida_inmunidad = $3;
+    printf("Tasa de pérdida de inmunidad: %f\n", t_perdida_inmunidad); 
   }
   | TMCD '=' DECIMAL {
     if($3 < 0.0 || $3 > 1.0){
       printf("\nEl número debe estar entre 0 y 1\n");
       return 1;
     }
-    printf("DECIMAL: %f\n", $3); 
+    t_mortalidad_enfermedades = $3;
+    printf("Tasa de mortalidad por enfermedades: %f\n", t_mortalidad_enfermedades); 
   }
   | TME '=' DECIMAL {
     if($3 < 0.0 || $3 > 1.0){
       printf("\nEl número debe estar entre 0 y 1\n");
       return 1;
     }
-    printf("DECIMAL: %f\n", $3); 
+    t_mortalidad = $3;
+    printf("Tasa de mortalidad: %f\n", t_mortalidad); 
+  }
+  | DIAS '=' NUM {
+    ciclo = $3;
+    printf("Cantidad de ciclos: %i", $3);
+  }
+  | GRILLA '=' VALUE {
+    filas = (int)$3[0] - 48;
+    columnas = (int)$3[2] - 48;
   }
   ;
 
