@@ -1,52 +1,41 @@
 %{
 
-#include <iostream>
+#include <ctime>
 #include <vector>
 #include <string>
-#include <algorithm>
 #include <cstdlib>
-#include <ctime>
+#include <iostream>
+#include <algorithm>
+
 using namespace std;
 
-// variables globales
-
-// tasa de transmisiÃ³n
-float B;
-// tasa de reclutamiento
-float A;
-// tasa de morbilidad
-float a1;
-// tasa de recuperacion
-float a2;
-// tasa de perdida de inmunidad
-float p;
-// tasa de mortalidad por razones distintas a la enfermedad
-float u;
-// tasa de mortalidad inducida por la enfermedad
-float g;
+float t_mortalidad;
+float t_morbilidad;
+float t_transmision;
+float t_recuperacion;
+float t_reclutamiento;
+float t_perdida_inmunidad;
+float t_mortalidad_enfermedades;
 
 float r;
 float e;
 float y;
 
-
-
-class ciudad
+class area
 {
 public:
-    vector<int> foto;
-    vector<vector<int>> calendario;
-
     long ciclo;
-    long infectados;
-    long suceptibles;
     long expuestos;
+    long infectados;
     long recuperados;
+    long suceptibles;
+    vector<int> foto;
+    long total_muertos;
     long total_poblacion;
     long total_poblacion_anterior; 
-    long total_muertos;
+    vector<vector<int>> calendario;
 
-    ciudad(int inf, int suc, int exps, int recup)
+    area(int inf, int suc, int exps, int recup)
     {
         infectados = inf;
         suceptibles = suc;
@@ -60,61 +49,52 @@ public:
     // Setter
     void set_total_poblacion()
     {
-        total_poblacion = infectados + suceptibles + expuestos + recuperados;
+      total_poblacion = infectados + suceptibles + expuestos + recuperados;
     }
 
-    void set_total_poblacion_anterior(){
-        total_poblacion_anterior = total_poblacion; 
+    void set_total_poblacion_prev(){
+      total_poblacion_anterior = total_poblacion; 
     }
 
     // tasa de cambio de los suceptibles
     float tasa_cambio_suceptibles(float recuperados_aux,float suceptibles_aux)
     {
-         //float tasa_cambio_S = (A*total_poblacion) - ((r * B*suceptibles*infectados)/total_poblacion) - (u*suceptibles);
-        float tasa_cambio_S = A + (p * recuperados_aux) - (B * suceptibles_aux) - (u * suceptibles_aux);
-        //cout << suceptibles_aux * u  <<endl;//+ (p * recuperados) - (B * suceptibles) - (u * suceptibles);
-        return tasa_cambio_S;
+      float tasa_cambio_S = t_reclutamiento + (t_perdida_inmunidad * recuperados_aux) - (t_transmision * suceptibles_aux) - (t_mortalidad * suceptibles_aux);
+      return tasa_cambio_S;
     }
 
     float tasa_cambio_expuesto(float suceptibles_aux , float expuestos_aux)
     {
-        
-        //float tasa_cambio_E = ((r * B * suceptibles * infectados)/total_poblacion) - (e*expuestos);
-        //cout << tasa_cambio_E <<endl;
-        float tasa_cambio_E = (B * suceptibles_aux) - (a1 * expuestos_aux) - (u * expuestos_aux);
-        
-        return tasa_cambio_E;
+      float tasa_cambio_E = ((t_transmision * suceptibles_aux) - (t_morbilidad * expuestos_aux) - (t_mortalidad * expuestos_aux));        
+      return tasa_cambio_E;
     }
 
     float tasa_cambio_infectado(float expuestos_aux,float infectados_aux)
     {
-        //float tasa_cambio_I = (e*expuestos) - (y*infectados) - (u *infectados);
-        float tasa_cambio_I = (a1 * expuestos_aux) - (a2 * infectados_aux) - (u * infectados_aux) - (g * infectados_aux);
-        return tasa_cambio_I;
+      float tasa_cambio_I = (t_morbilidad * expuestos_aux) - (t_recuperacion * infectados_aux) - (t_mortalidad * infectados_aux) - (t_mortalidad_enfermedades * infectados_aux);
+      return tasa_cambio_I;
     }
 
     float tasa_cambio_recuperados(float infectados_aux,float recuperados_aux)
     {
-        //float tasa_cambio_R = (y*infectados) - (u * recuperados);
-        float tasa_cambio_R = (a2 * infectados_aux) - (p * recuperados_aux) - (u * recuperados_aux);
-        return tasa_cambio_R;
+      float tasa_cambio_R = (t_recuperacion * infectados_aux) - (t_perdida_inmunidad * recuperados_aux) - (t_mortalidad * recuperados_aux);
+      return tasa_cambio_R;
     }
 
     // calcular total poblacion
-
     // variacion datos
     void avance_enfermedad()
     {
         /*
-        int expuestos_nuevos = suceptibles * B;
-        int infectados_nuevos = expuestos * a1;
-        int recuperados_nuevos = infectados * a2;
-        int suceptibles_nuevos = (recuperados * p) + (A * total_poblacion);
+        int expuestos_nuevos = suceptibles * t_transmision;
+        int infectados_nuevos = expuestos * t_morbilidad;
+        int recuperados_nuevos = infectados * t_recuperacion;
+        int suceptibles_nuevos = (recuperados * t_perdida_inmunidad) + (t_reclutamiento * total_poblacion);
 
-        int expuestos_muertos = expuestos * u;
-        int infectados_muertos = (infectados * u) + (infectados * g);
-        int recuperados_muertos = recuperados * u;
-        int suceptibles_muertos = suceptibles * u;
+        int expuestos_muertos = expuestos * t_mortalidad;
+        int infectados_muertos = (infectados * t_mortalidad) + (infectados * t_mortalidad_enfermedades);
+        int recuperados_muertos = recuperados * t_mortalidad;
+        int suceptibles_muertos = suceptibles * t_mortalidad;
 
         total_muertos = expuestos_muertos + infectados_muertos + recuperados_muertos + suceptibles_muertos + total_muertos;
         */
@@ -144,53 +124,20 @@ public:
         
         total_muertos = total_poblacion_anterior - total_poblacion;
        
-        set_total_poblacion_anterior();
+        set_total_poblacion_prev();
     }
 };
 
 
 //determinar cantidad de gente que se va de la celula
-// determinar que tipo de gente se va a mover
-// deteminar que cantidad de cada tipo se movera a cada celula
-
-
-// int main(int argc, char const *argv[])
-// {
-    
-//     B = 0.2; // tasa de infeccion
-//     A = 2000; //tasa de reclutamiento
-//     a1 = 2; // tasa de morbilidad
-//     a2 = 0.8; // tasa de recuperacion
-//     p = 0.8; // tasa de perdidad de inmunidad
-//     u = 0.00; // tasa de mortalidad por causas distintas
-//     g = 0.03; // tasa de mortalidad por la enfermedad
-
-//     /*
-//     r = 100; // numero de contactos por unidad de tiempo
-//     y = 0.9; // el ratio de recuperacion de la gente, va entre 0 y 1
-//     e = 0.7; // el ratio de progresion al estado infeccioso per capita
-//     */
-
-
-
-//     ciudad manhattan(10000, 1000000, 0, 0); // infectados , suceptibles, expuestos, recuperados
-//     for (int i = 0; i < 10; i++)
-//     {
-//         manhattan.avance_enfermedad();
-         
-//         manhattan.set_total_poblacion();
-//     }
-
-//     return 0;
-// }
-
+// determinar que tipo de gente se va t_reclutamiento mover
+// deteminar que cantidad de cada tipo se movera t_reclutamiento cada celula
 void start(int infectados, int suceptibles, int expuestos, int recuperados){
-  ciudad manhattan(infectados, suceptibles, expuestos, recuperados);
+  area manhattan(infectados, suceptibles, expuestos, recuperados);
   for (int i = 0; i < 10; i++)
   {
-      manhattan.avance_enfermedad();
-        
-      manhattan.set_total_poblacion();
+    manhattan.avance_enfermedad();
+    manhattan.set_total_poblacion();
   }
 }
 
