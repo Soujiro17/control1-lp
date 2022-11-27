@@ -7,15 +7,21 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <algorithm>
+
 using namespace std;
 
 #define MAX_ESTADOS 10
 
+typedef struct Transition{
+  struct Node *nodoInicio = NULL;
+  struct Node *nodoFinal = NULL;
+  string symbol;
+} Transicion;
+
 typedef struct Node{
         string name;
         bool isFinal = 0;
-        struct Node *nextNode = NULL;
-        string symbol;
 } State;
 
 typedef struct DFA{
@@ -23,6 +29,7 @@ typedef struct DFA{
   vector <string> alfabeto;
   State *estado_inicial;
   vector <State> estados_finales;
+  vector <Transicion> transiciones;
 } Dfa;
 
 int yylex();
@@ -33,21 +40,73 @@ void yyerror(const char *s){
 
 Dfa dfa;
 
-State getState(string stateName){
-  State *nodoEncontrado;
+bool evaluarCadena(char *cadena){
 
-  for(int i = 0; i<dfa.estados.size(); i++){
-    if(dfa.estados[i].name.compare(stateName) == 0){
-      nodoEncontrado = &dfa.estados[i];
-    }
+  int size = strlen(cadena);
+
+  if (cadena[size - 1] == ')'){
+    cadena[size - 1] = '\0';
   }
 
-  return &nodoEncontrado;
-}
+  string stringCadena(cadena);
 
-bool evaluarCadena(char cadena){
-  printf("Se encuentra");
-  printf("No se encuentra");
+  Transicion transicionActual;
+  State *estadoInicial = dfa.estado_inicial;
+
+  bool error = true;
+  int count = 1;
+
+  int largoCadena = stringCadena.length();
+
+  printf("Estado inicial: %s\n", estadoInicial->name.c_str());
+
+  char *token = strtok(cadena, ",");
+
+  while( token != NULL ) {
+    error = true;
+    count++;
+
+    int size = strlen(token);
+
+    if (token[size - 1] == '\n'){
+      token[size - 1] = '\0';
+    }
+
+    string symbol(token);
+
+    for(int i = 0; i<dfa.transiciones.size(); i++){
+
+      if(count == 0){
+        if(dfa.transiciones[i].symbol.compare(symbol) == 0 && dfa.transiciones[i].nodoInicio->name.compare(estadoInicial->name) == 0){
+          transicionActual = dfa.transiciones[i];
+          error = false;
+        }
+      }else{
+        if(dfa.transiciones[i].symbol.compare(symbol) == 0){
+          transicionActual = dfa.transiciones[i];
+          error = false;
+        }
+      }
+    }
+
+    printf("Nodo de inicio: %s - Nodo destino: %s - Símbolo: %s\n",((transicionActual).nodoInicio)->name.c_str(), ((transicionActual).nodoFinal)->name.c_str(), (transicionActual).symbol.c_str());
+
+    if(error == true){
+      printf("\nCadena no en nodo final. Error");
+      exit(0);
+    }
+
+    if(largoCadena == count){
+      if(((transicionActual).nodoFinal)->isFinal == 1){
+        printf("Cadena reconocida!\n");
+      }else{
+        printf("\nCadena no reconocida. Error\n");
+      }
+    }
+
+    token = strtok(NULL, ",");
+  }
+
   return true;
 }
 
@@ -75,10 +134,10 @@ void dfaResume(){
   char * str;
 }
 
-%type<str> statement estados valores cadena
+%type<str> statement estados valores evaluar
 
 %token<str> ESTADOS INICIAL FINAL ALFABETO
-%token<str> ESTADO VALUE EVALUAR CADENA
+%token<str> ESTADO VALUE EVALUAR
 %token<str> TRANSICION
 %token ENDLINE
 
@@ -90,12 +149,21 @@ input:
 
 linea: ENDLINE 
   | statement ENDLINE
+  | evaluar ENDLINE
   ; 
 
 statement: ESTADOS '=' estados {
+
       char *token = strtok($3, ",");
 
       while( token != NULL ) {
+
+        int size = strlen(token);
+
+        if (token[size - 1] == '\n'){
+          token[size - 1] = '\0';
+        }
+
         State nodo;
         nodo.name = token;
         dfa.estados.push_back(nodo);
@@ -104,7 +172,6 @@ statement: ESTADOS '=' estados {
 
     }
   | INICIAL '=' ESTADO {
-
       for(int i = 0; i<dfa.estados.size(); i++){
         if(strcmp(dfa.estados[i].name.c_str(), $3) == 0){
           dfa.estado_inicial = &dfa.estados[i];
@@ -116,6 +183,12 @@ statement: ESTADOS '=' estados {
   | FINAL '=' estados {
       char *token = strtok($3, ",");
       while( token != NULL ) {
+
+        int size = strlen(token);
+
+        if (token[size - 1] == '\n'){
+          token[size - 1] = '\0';
+        }
 
         for(int i=0; i<dfa.estados.size(); i++){
           if(strcmp(dfa.estados[i].name.c_str(), token) == 0){
@@ -134,47 +207,82 @@ statement: ESTADOS '=' estados {
       string nodo1 = nodos.substr(0, 2);
       string nodo2 = nodos.substr(3, 2);
 
-      State nodoEncontrado = getState(nodo1);
-      
-      printf("%s - %s - %s", nodo1.c_str(), nodo2.c_str(), transicion.c_str());
+      State *nodoEncontrado1 = NULL;
+      State *nodoEncontrado2 = NULL;
 
       for(int i = 0; i<dfa.estados.size(); i++){
-        if(dfa.estados[i].name.compare())
+        if(dfa.estados[i].name.compare(nodo1) == 0){
+          nodoEncontrado1 = &dfa.estados[i];
+        }else if (dfa.estados[i].name.compare(nodo2) == 0){
+          nodoEncontrado2 = &dfa.estados[i];
+        }
       }
-      // char *token = strtok(nodos, ",");
-      // while( token != NULL ) {
-      //   // State nodo;
-      //   // nodo.name = token;
-      //   // dfa.estados.push_back(nodo);
-      //   printf("%s", token);
-      //   token = strtok(NULL, ",");
-      // }
+
+      if(nodoEncontrado1 == NULL){
+        printf("Nodo1 no encontrado: error.");
+        exit(0);
+      }
+
+      if(nodoEncontrado2 == NULL){
+        printf("Nodo2 no encontrado: error.");
+        exit(0);
+      }
+
+      if(!count(dfa.alfabeto.begin(), dfa.alfabeto.end(), transicion)){
+        printf("Letra no encontrada en alfabeto.");
+        exit(0);
+      }
+
+      Transicion nuevaTransicion = {
+        .nodoInicio = nodoEncontrado1,
+        .nodoFinal = nodoEncontrado2,
+        .symbol = transicion
+      };
+
+      dfa.transiciones.push_back(nuevaTransicion);
+
+      nodoEncontrado1 = NULL;
+      nodoEncontrado2 = NULL;
+      nodos = "";
+      transicion = "";
+      nodo1 = "";
+      nodo2 = "";
+
     }
   | ALFABETO '=' valores {
       char *token = strtok($3, ",");
       while( token != NULL ) {
+
+        int size = strlen(token);
+
+        if (token[size - 1] == '\n'){
+          token[size - 1] = '\0';
+        }
+
         string s(token);
         dfa.alfabeto.push_back(s);
         token = strtok(NULL, ",");
       }
 
-      dfaResume();
+      // dfaResume();
     }
   ;
 
-estados: ESTADO
-  | estados ',' estados
-  ;
+estados: ESTADO | estados ',' estados;
 
-valores: VALUE | valores ',' valores;
+valores: VALUE | valores ',' VALUE;
 
-cadena: valores | valores cadena
-
-evaluar: EVALUAR '(' cadena ')' { evaluarCadena($3); };
+evaluar: EVALUAR '(' valores ')' { evaluarCadena($3); };
 
 %%
 
 int main(int argc, char **argv){
+
+  // int tok;
   yyparse();
+
+  // while(tok = yylex()){
+  //   printf("%d\n", tok);
+  // }
   return 0;
 }
