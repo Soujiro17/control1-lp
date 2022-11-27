@@ -19,8 +19,8 @@ func main() {
 	height := flag.Int("height", 30, "altura del tablero (int)")
 	width := flag.Int("width", 50, "anchura del tablero (int)")
 	speed := flag.Int("speed", 3, "velocidad de la serpiente (1-5) (más rápido a más lento) (int)")
+	// snakes := flag.Int("snakes", 3, "cantidad de serpientes (int)")
 	pacmanEffect := flag.Bool("pacman", true, "efecto pacman (que traspase paredes) (bool)")
-	
 
 	flag.Parse()
 

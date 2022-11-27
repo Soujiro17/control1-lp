@@ -21,6 +21,7 @@ type Snake struct {
 	Direction Direction
 	Length    int
 	Positions []Coordinates
+	FoodEaten		bool
 }
 
 // Move is the function that moves a snake
@@ -121,9 +122,9 @@ func (s *Snake) Grow() {
 }
 
 // Init initializes the snake's head
-func (s *Snake) Init(height, width int) {
+func (s *Snake) Init(height, width, row int) {
 	s.Length = 1
-	s.Positions = append(s.Positions, Coordinates{X: width / 2, Y: height / 2})
-	termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('•'), termbox.ColorGreen, termbox.ColorDefault)
+	s.Positions = append(s.Positions, Coordinates{X: (width / 2) + row, Y: height / 2})
+	termbox.SetCell(s.Positions[0].X + row, s.Positions[0].Y, rune('•'), termbox.ColorGreen, termbox.ColorDefault)
 	termbox.Flush()
 }

@@ -1,7 +1,6 @@
 package game
 
 import (
-	"fmt"
 	"math"
 	"time"
 
@@ -20,11 +19,7 @@ type Options struct {
 	Speed        int
 	Height			 int
 	Width			 	 int
-}
-
-func updateScore(score, height, width int) {
-	str := fmt.Sprintf("Puntos: %d", score)
-	DrawString(width-1-len(str), height-1, str, termbox.ColorDefault, termbox.ColorDefault)
+	Snakes			 int
 }
 
 func Play(keyPressed chan termbox.Key, options Options) {
@@ -43,10 +38,8 @@ func Play(keyPressed chan termbox.Key, options Options) {
 	// y la anchura del tablero para posicionar el texto
 	// del score
 
-	updateScore(0, height, width)
-
 	// Creamos la serpiente
-	snake := Init(height, width)
+	snake := Init(height, width, 5)
 
 	// Inicializamos una variable Food que generaremos con comida
 	// además de pasarle la altura y la anchura del tablero para
@@ -55,7 +48,7 @@ func Play(keyPressed chan termbox.Key, options Options) {
 	food.Generate(snake, height, width)
 
 	// Variables de continuidad y crecimiento
-	foodEaten := false
+	// foodEaten := false
 	alive := true
 	maxLength := (width - 2) * (height - 2)
 
@@ -99,16 +92,12 @@ func Play(keyPressed chan termbox.Key, options Options) {
 						if snake.Direction != RIGHT {
 							snake.Direction = LEFT
 						}
-					// case termbox.KeyEnter:
-					// 	go func() { Play(keyPressed, options) }()
-					// 	return
 				}
 			default:
-				if foodEaten { // Si la serpiente se come una fruta
+				if snake.FoodEaten { // Si la serpiente se come una fruta
 					snake.Grow() // La serpiente crece
 					alive = snake.Move(false, options)
 					food.Generate(snake, height, width) // Se genera una nueva comida
-					updateScore(snake.Length - 1,height, width) // Se actualiza el score
 
 					if snake.Length == maxLength { // Si alcanza el tamaño máximo
 						str := "Ganaste!"
@@ -134,13 +123,13 @@ func Play(keyPressed chan termbox.Key, options Options) {
 					alive = snake.Move(true, options)
 				}
 
-				foodEaten = false
+				snake.FoodEaten = false
 
 				// Si la posición de la fruta es la misma que la de
 				// la serpiente, es porque se la comieron, por lo tanto
 				// foodEaten debe ser true
 				if snake.Positions[0].X == food.Position.X && snake.Positions[0].Y == food.Position.Y {
-					foodEaten = true
+					snake.FoodEaten = true
 				}
 
 				// TimeSleep de la velocidad
@@ -159,14 +148,15 @@ func Play(keyPressed chan termbox.Key, options Options) {
 }
 
 // Inicializa un nuevo juego
-func Init(height, width int) Snake {
+func Init(height, width, row int) Snake {
 
 	snake := Snake{
 		Direction: RIGHT,
 		Length:    0,
 		Positions: []Coordinates{},
+		FoodEaten: false,
 	}
-	snake.Init(height, width)
+	snake.Init(height, width, row)
 
 	return snake
 }
