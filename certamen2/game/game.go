@@ -45,10 +45,8 @@ func Play(keyPressed chan termbox.Key, options Options) {
 
 	updateScore(0, height, width)
 
-
-	// Dos serpientes???
-	Init(width, height)
-	snake := Init(width, height)
+	// Creamos la serpiente
+	snake := Init(height, width)
 
 	// Inicializamos una variable Food que generaremos con comida
 	// además de pasarle la altura y la anchura del tablero para
@@ -60,7 +58,6 @@ func Play(keyPressed chan termbox.Key, options Options) {
 	foodEaten := false
 	alive := true
 	maxLength := (width - 2) * (height - 2)
-
 
 	for {
 		if !alive { // Si no estás vivo (o sea, perdiste)
