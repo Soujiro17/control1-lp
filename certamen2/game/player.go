@@ -42,46 +42,46 @@ func (s *Snake) Move(deleteTail bool, options Options) bool {
 	crushedAgainstWall := false
 	// Move head
 	switch s.Direction {
-	case UP:
-		s.Positions[0].Y--
-		if s.Positions[0].Y == 0 {
-			if options.PacmanEffect {
-				s.Positions[0].Y = height - 2
-			} else {
-				crushedAgainstWall = true
+		case UP:
+			s.Positions[0].Y--
+			if s.Positions[0].Y == 0 {
+				if options.PacmanEffect {
+					s.Positions[0].Y = height - 2
+				} else {
+					crushedAgainstWall = true
+				}
 			}
-		}
-		termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('▴'), termbox.ColorGreen, termbox.ColorDefault)
-	case DOWN:
-		s.Positions[0].Y++
-		if s.Positions[0].Y == height-1 {
-			if options.PacmanEffect {
-				s.Positions[0].Y = 1
-			} else {
-				crushedAgainstWall = true
+			termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('▴'), termbox.ColorGreen, termbox.ColorDefault)
+		case DOWN:
+			s.Positions[0].Y++
+			if s.Positions[0].Y == height-1 {
+				if options.PacmanEffect {
+					s.Positions[0].Y = 1
+				} else {
+					crushedAgainstWall = true
+				}
 			}
-		}
-		termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('▾'), termbox.ColorGreen, termbox.ColorDefault)
-	case LEFT:
-		s.Positions[0].X--
-		if s.Positions[0].X == 0 {
-			if options.PacmanEffect {
-				s.Positions[0].X = width - 2
-			} else {
-				crushedAgainstWall = true
+			termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('▾'), termbox.ColorGreen, termbox.ColorDefault)
+		case LEFT:
+			s.Positions[0].X--
+			if s.Positions[0].X == 0 {
+				if options.PacmanEffect {
+					s.Positions[0].X = width - 2
+				} else {
+					crushedAgainstWall = true
+				}
 			}
-		}
-		termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('◂'), termbox.ColorGreen, termbox.ColorDefault)
-	case RIGHT:
-		s.Positions[0].X++
-		if s.Positions[0].X == width-1 {
-			if options.PacmanEffect {
-				s.Positions[0].X = 1
-			} else {
-				crushedAgainstWall = true
+			termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('◂'), termbox.ColorGreen, termbox.ColorDefault)
+		case RIGHT:
+			s.Positions[0].X++
+			if s.Positions[0].X == width-1 {
+				if options.PacmanEffect {
+					s.Positions[0].X = 1
+				} else {
+					crushedAgainstWall = true
+				}
 			}
-		}
-		termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('▸'), termbox.ColorGreen, termbox.ColorDefault)
+			termbox.SetCell(s.Positions[0].X, s.Positions[0].Y, rune('▸'), termbox.ColorGreen, termbox.ColorDefault)
 
 	}
 	termbox.Flush()

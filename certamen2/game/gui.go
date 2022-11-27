@@ -35,6 +35,8 @@ func DrawBox(height, width int) {
 	termbox.Flush()
 }
 
+// Posicion x, y, string a escribir, foreground (color text)
+// background (color fondo texto)
 func DrawString(x, y int, str string, fg, bg termbox.Attribute) {
 	for pos, char := range str {
 		termbox.SetCell(x+pos, y, rune(char), fg, bg)

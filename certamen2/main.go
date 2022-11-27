@@ -15,21 +15,27 @@ func main() {
 	
 	defer termbox.Close()
 
-	height := flag.Int("height", 30, "an int")
-	width := flag.Int("width", 50, "an int")
+	// Argumentos del programa
+	height := flag.Int("height", 30, "altura del tablero (int)")
+	width := flag.Int("width", 50, "anchura del tablero (int)")
+	speed := flag.Int("speed", 3, "velocidad de la serpiente (1-5) (más rápido a más lento) (int)")
+	pacmanEffect := flag.Bool("pacman", true, "efecto pacman (que traspase paredes) (bool)")
+	
 
 	flag.Parse()
 
 	keyPressed := make(chan termbox.Key)
+
+	// Configuración del juego
 	gameOptions := game.Options{
-		PacmanEffect: true,
-		Speed:        3, // 1-5 (más rápido al más lento)
+		PacmanEffect: *pacmanEffect,
+		Speed:        *speed, // 1-5 (más rápido al más lento)
 		Height: 			*height,
 		Width:				*width,
 	}
 	
 	go game.Play(keyPressed, gameOptions)
-	
+
 	exit := false
 	
 	for {
