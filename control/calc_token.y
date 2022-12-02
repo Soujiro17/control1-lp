@@ -96,6 +96,8 @@ bool evaluarCadena(char *cadena){
       exit(0);
     }
 
+    printf("largoCadena: %s, count: %s", largoCadena, count);
+
     if(largoCadena == count){
       if(((transicionActual).nodoFinal)->isFinal == 1){
         printf("Cadena reconocida!\n");
@@ -110,20 +112,24 @@ bool evaluarCadena(char *cadena){
   return true;
 }
 
-void dfaResume(){
-  printf("\nEstados:\n");
-  for(int i = 0; i<dfa.estados.size(); i++){
-    if(dfa.estados[i].isFinal == 1){
-      printf("  - %s (final)\n", dfa.estados[i].name.c_str());
-    }else{
-      printf("  - %s\n", dfa.estados[i].name.c_str());
-    }
-  }
-  printf("Estado inicial: %s", (*dfa.estado_inicial).name.c_str());
+void dfaResume(char *symbol){
 
-  printf("\nAlfabeto: ");
-  for(int i = 0; i<dfa.alfabeto.size(); i++){
-    printf("%s ", dfa.alfabeto[i].c_str());
+  char sim = symbol[0];
+
+  printf("symbol: %s", symbol);
+
+  if(strcmp(symbol, "EF)") == 0){
+    for(int i = 0; i<dfa.estados_finales.size(); i++){
+      printf("Estado final: %s", dfa.estados_finales[i].name.c_str());
+    }
+  }else if(sim == 'E'){
+    for(int i = 0; i<dfa.estados.size(); i++){
+      printf("Estado: %s\n", dfa.estados[i].name.c_str());
+    }
+  }else if(sim == 'A'){
+    for(int i = 0; i<dfa.alfabeto.size(); i++){
+      printf("Letra alfabeto: %s\n", dfa.alfabeto[i].c_str());
+    }
   }
 }
 
@@ -134,9 +140,9 @@ void dfaResume(){
   char * str;
 }
 
-%type<str> statement estados valores evaluar
+%type<str> statement estados valores evaluar desc descV
 
-%token<str> ESTADOS INICIAL FINAL ALFABETO
+%token<str> ESTADOS INICIAL FINAL ALFABETO DESC DESCV
 %token<str> ESTADO VALUE EVALUAR
 %token<str> TRANSICION
 %token ENDLINE
@@ -150,11 +156,14 @@ input:
 linea: ENDLINE 
   | statement ENDLINE
   | evaluar ENDLINE
+  | desc ENDLINE
   ; 
 
 statement: ESTADOS '=' estados {
 
       char *token = strtok($3, ",");
+
+      dfa.estados.clear();
 
       while( token != NULL ) {
 
@@ -273,6 +282,15 @@ estados: ESTADO | estados ',' estados;
 valores: VALUE | valores ',' VALUE;
 
 evaluar: EVALUAR '(' valores ')' { evaluarCadena($3); };
+
+descV: ESTADOS
+  | ALFABETO
+  | FINAL
+  | INICIAL
+  | TRANSICION
+  ;
+
+desc: DESC '(' descV ')' { dfaResume($3); }
 
 %%
 
