@@ -54,7 +54,7 @@ bool evaluarCadena(char *cadena){
   State *estadoInicial = dfa.estado_inicial;
 
   bool error = true;
-  int count = 1;
+  int count = 0;
 
   int largoCadena = stringCadena.length();
 
@@ -64,7 +64,6 @@ bool evaluarCadena(char *cadena){
 
   while( token != NULL ) {
     error = true;
-    count++;
 
     int size = strlen(token);
 
@@ -80,6 +79,7 @@ bool evaluarCadena(char *cadena){
         if(dfa.transiciones[i].symbol.compare(symbol) == 0 && dfa.transiciones[i].nodoInicio->name.compare(estadoInicial->name) == 0){
           transicionActual = dfa.transiciones[i];
           error = false;
+          break;
         }
       }else{
         if(dfa.transiciones[i].symbol.compare(symbol) == 0){
@@ -89,16 +89,17 @@ bool evaluarCadena(char *cadena){
       }
     }
 
-    printf("Nodo de inicio: %s - Nodo destino: %s - Símbolo: %s\n",((transicionActual).nodoInicio)->name.c_str(), ((transicionActual).nodoFinal)->name.c_str(), (transicionActual).symbol.c_str());
 
     if(error == true){
       printf("\nCadena no en nodo final. Error");
       exit(0);
     }
 
-    printf("largoCadena: %s, count: %s", largoCadena, count);
+    printf("Nodo de inicio: %s - Nodo destino: %s - Símbolo: %s\n",((transicionActual).nodoInicio)->name.c_str(), ((transicionActual).nodoFinal)->name.c_str(), (transicionActual).symbol.c_str());
 
-    if(largoCadena == count){
+    count++;
+
+    if((largoCadena - ((largoCadena/2))) == count){
       if(((transicionActual).nodoFinal)->isFinal == 1){
         printf("Cadena reconocida!\n");
       }else{
