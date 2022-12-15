@@ -1,0 +1,227 @@
+{
+"filas": 3,
+"columnas": 3,
+"segundos": 20,
+"data": [
+[
+{ "id": 0, "segundos": 0, "expuestos": 70, "infectados": 814, "suceptibles": 269, "recuperados": 4656, "total_muertos": 361, "total_poblacion": 5809 },
+{ "id": 1, "segundos": 0, "expuestos": 93, "infectados": 606, "suceptibles": 359, "recuperados": 3468, "total_muertos": 276, "total_poblacion": 4526 },
+{ "id": 2, "segundos": 0, "expuestos": 144, "infectados": 329, "suceptibles": 557, "recuperados": 1884, "total_muertos": 165, "total_poblacion": 2914 },
+{ "id": 3, "segundos": 0, "expuestos": 46, "infectados": 860, "suceptibles": 178, "recuperados": 4919, "total_muertos": 377, "total_poblacion": 6003 },
+{ "id": 4, "segundos": 0, "expuestos": 179, "infectados": 960, "suceptibles": 689, "recuperados": 5488, "total_muertos": 439, "total_poblacion": 7316 },
+{ "id": 5, "segundos": 0, "expuestos": 150, "infectados": 532, "suceptibles": 579, "recuperados": 3040, "total_muertos": 252, "total_poblacion": 4301 },
+{ "id": 6, "segundos": 0, "expuestos": 18, "infectados": 273, "suceptibles": 70, "recuperados": 1561, "total_muertos": 121, "total_poblacion": 1922 },
+{ "id": 7, "segundos": 0, "expuestos": 176, "infectados": 469, "suceptibles": 680, "recuperados": 2683, "total_muertos": 230, "total_poblacion": 4008 },
+{ "id": 8, "segundos": 0, "expuestos": 62, "infectados": 456, "suceptibles": 241, "recuperados": 2607, "total_muertos": 206, "total_poblacion": 3366 }
+], 
+[
+{ "id": 0, "segundos": 1, "expuestos": 0, "infectados": 253, "suceptibles": 3932, "recuperados": 1442, "total_muertos": 200, "total_poblacion": 5609 },
+{ "id": 1, "segundos": 1, "expuestos": 0, "infectados": 270, "suceptibles": 3051, "recuperados": 1074, "total_muertos": 154, "total_poblacion": 4372 },
+{ "id": 2, "segundos": 1, "expuestos": 0, "infectados": 334, "suceptibles": 1936, "recuperados": 583, "total_muertos": 97, "total_poblacion": 2817 },
+{ "id": 3, "segundos": 1, "expuestos": 0, "infectados": 212, "suceptibles": 4072, "recuperados": 1524, "total_muertos": 206, "total_poblacion": 5797 },
+{ "id": 4, "segundos": 1, "expuestos": 0, "infectados": 492, "suceptibles": 4921, "recuperados": 1700, "total_muertos": 249, "total_poblacion": 7067 },
+{ "id": 5, "segundos": 1, "expuestos": 0, "infectados": 374, "suceptibles": 2878, "recuperados": 942, "total_muertos": 145, "total_poblacion": 4156 },
+{ "id": 6, "segundos": 1, "expuestos": 0, "infectados": 74, "suceptibles": 1303, "recuperados": 483, "total_muertos": 66, "total_poblacion": 1856 },
+{ "id": 7, "segundos": 1, "expuestos": 0, "infectados": 417, "suceptibles": 2670, "recuperados": 831, "total_muertos": 135, "total_poblacion": 3873 },
+{ "id": 8, "segundos": 1, "expuestos": 0, "infectados": 187, "suceptibles": 2271, "recuperados": 807, "total_muertos": 116, "total_poblacion": 3250 }
+], 
+[
+{ "id": 0, "segundos": 2, "expuestos": 804, "infectados": 0, "suceptibles": 4181, "recuperados": 447, "total_muertos": 177, "total_poblacion": 5432 },
+{ "id": 1, "segundos": 2, "expuestos": 633, "infectados": 0, "suceptibles": 3208, "recuperados": 398, "total_muertos": 141, "total_poblacion": 4231 },
+{ "id": 2, "segundos": 2, "expuestos": 424, "infectados": 0, "suceptibles": 1957, "recuperados": 366, "total_muertos": 95, "total_poblacion": 2722 },
+{ "id": 3, "segundos": 2, "expuestos": 825, "infectados": 7, "suceptibles": 4354, "recuperados": 428, "total_muertos": 183, "total_poblacion": 5614 },
+{ "id": 4, "segundos": 2, "expuestos": 1031, "infectados": 0, "suceptibles": 5149, "recuperados": 682, "total_muertos": 228, "total_poblacion": 6839 },
+{ "id": 5, "segundos": 2, "expuestos": 614, "infectados": 0, "suceptibles": 2969, "recuperados": 459, "total_muertos": 137, "total_poblacion": 4019 },
+{ "id": 6, "segundos": 2, "expuestos": 264, "infectados": 2, "suceptibles": 1390, "recuperados": 141, "total_muertos": 59, "total_poblacion": 1797 },
+{ "id": 7, "segundos": 2, "expuestos": 580, "infectados": 0, "suceptibles": 2721, "recuperados": 474, "total_muertos": 129, "total_poblacion": 3744 },
+{ "id": 8, "segundos": 2, "expuestos": 469, "infectados": 0, "suceptibles": 2394, "recuperados": 286, "total_muertos": 104, "total_poblacion": 3146 }
+], 
+[
+{ "id": 0, "segundos": 3, "expuestos": 8, "infectados": 1608, "suceptibles": 3577, "recuperados": 75, "total_muertos": 164, "total_poblacion": 5268 },
+{ "id": 1, "segundos": 3, "expuestos": 0, "infectados": 1264, "suceptibles": 2788, "recuperados": 61, "total_muertos": 128, "total_poblacion": 4103 },
+{ "id": 2, "segundos": 3, "expuestos": 0, "infectados": 844, "suceptibles": 1799, "recuperados": 42, "total_muertos": 82, "total_poblacion": 2640 },
+{ "id": 3, "segundos": 3, "expuestos": 21, "infectados": 1650, "suceptibles": 3695, "recuperados": 78, "total_muertos": 170, "total_poblacion": 5444 },
+{ "id": 4, "segundos": 3, "expuestos": 0, "infectados": 2058, "suceptibles": 4510, "recuperados": 97, "total_muertos": 206, "total_poblacion": 6633 },
+{ "id": 5, "segundos": 3, "expuestos": 0, "infectados": 1224, "suceptibles": 2653, "recuperados": 59, "total_muertos": 121, "total_poblacion": 3898 },
+{ "id": 6, "segundos": 3, "expuestos": 6, "infectados": 528, "suceptibles": 1183, "recuperados": 25, "total_muertos": 55, "total_poblacion": 1742 },
+{ "id": 7, "segundos": 3, "expuestos": 0, "infectados": 1155, "suceptibles": 2474, "recuperados": 55, "total_muertos": 113, "total_poblacion": 3631 },
+{ "id": 8, "segundos": 3, "expuestos": 0, "infectados": 937, "suceptibles": 2072, "recuperados": 46, "total_muertos": 95, "total_poblacion": 3051 }
+], 
+[
+{ "id": 0, "segundos": 4, "expuestos": 707, "infectados": 241, "suceptibles": 2814, "recuperados": 1299, "total_muertos": 207, "total_poblacion": 5061 },
+{ "id": 1, "segundos": 4, "expuestos": 567, "infectados": 156, "suceptibles": 2195, "recuperados": 1021, "total_muertos": 164, "total_poblacion": 3939 },
+{ "id": 2, "segundos": 4, "expuestos": 406, "infectados": 28, "suceptibles": 1419, "recuperados": 682, "total_muertos": 105, "total_poblacion": 2535 },
+{ "id": 3, "segundos": 4, "expuestos": 717, "infectados": 273, "suceptibles": 2907, "recuperados": 1333, "total_muertos": 214, "total_poblacion": 5230 },
+{ "id": 4, "segundos": 4, "expuestos": 934, "infectados": 224, "suceptibles": 3550, "recuperados": 1662, "total_muertos": 263, "total_poblacion": 6370 },
+{ "id": 5, "segundos": 4, "expuestos": 569, "infectados": 95, "suceptibles": 2090, "recuperados": 989, "total_muertos": 155, "total_poblacion": 3743 },
+{ "id": 6, "segundos": 4, "expuestos": 230, "infectados": 85, "suceptibles": 931, "recuperados": 426, "total_muertos": 70, "total_poblacion": 1672 },
+{ "id": 7, "segundos": 4, "expuestos": 549, "infectados": 55, "suceptibles": 1949, "recuperados": 933, "total_muertos": 145, "total_poblacion": 3486 },
+{ "id": 8, "segundos": 4, "expuestos": 418, "infectados": 123, "suceptibles": 1632, "recuperados": 757, "total_muertos": 121, "total_poblacion": 2930 }
+], 
+[
+{ "id": 0, "segundos": 5, "expuestos": 0, "infectados": 1447, "suceptibles": 3206, "recuperados": 413, "total_muertos": 160, "total_poblacion": 4901 },
+{ "id": 1, "segundos": 5, "expuestos": 0, "infectados": 1155, "suceptibles": 2507, "recuperados": 298, "total_muertos": 124, "total_poblacion": 3815 },
+{ "id": 2, "segundos": 5, "expuestos": 0, "infectados": 815, "suceptibles": 1638, "recuperados": 138, "total_muertos": 78, "total_poblacion": 2457 },
+{ "id": 3, "segundos": 5, "expuestos": 0, "infectados": 1472, "suceptibles": 3305, "recuperados": 445, "total_muertos": 165, "total_poblacion": 5065 },
+{ "id": 4, "segundos": 5, "expuestos": 0, "infectados": 1899, "suceptibles": 4063, "recuperados": 461, "total_muertos": 199, "total_poblacion": 6171 },
+{ "id": 5, "segundos": 5, "expuestos": 0, "infectados": 1151, "suceptibles": 2400, "recuperados": 244, "total_muertos": 116, "total_poblacion": 3627 },
+{ "id": 6, "segundos": 5, "expuestos": 0, "infectados": 471, "suceptibles": 1057, "recuperados": 140, "total_muertos": 54, "total_poblacion": 1618 },
+{ "id": 7, "segundos": 5, "expuestos": 0, "infectados": 1105, "suceptibles": 2247, "recuperados": 202, "total_muertos": 107, "total_poblacion": 3379 },
+{ "id": 8, "segundos": 5, "expuestos": 0, "infectados": 853, "suceptibles": 1862, "recuperados": 227, "total_muertos": 92, "total_poblacion": 2838 }
+], 
+[
+{ "id": 0, "segundos": 6, "expuestos": 811, "infectados": 0, "suceptibles": 2799, "recuperados": 1227, "total_muertos": 191, "total_poblacion": 4710 },
+{ "id": 1, "segundos": 6, "expuestos": 650, "infectados": 0, "suceptibles": 2169, "recuperados": 974, "total_muertos": 150, "total_poblacion": 3665 },
+{ "id": 2, "segundos": 6, "expuestos": 465, "infectados": 0, "suceptibles": 1371, "recuperados": 675, "total_muertos": 99, "total_poblacion": 2358 },
+{ "id": 3, "segundos": 6, "expuestos": 822, "infectados": 0, "suceptibles": 2901, "recuperados": 1253, "total_muertos": 196, "total_poblacion": 4869 },
+{ "id": 4, "segundos": 6, "expuestos": 1072, "infectados": 0, "suceptibles": 3497, "recuperados": 1597, "total_muertos": 243, "total_poblacion": 5928 },
+{ "id": 5, "segundos": 6, "expuestos": 653, "infectados": 0, "suceptibles": 2043, "recuperados": 962, "total_muertos": 143, "total_poblacion": 3484 },
+{ "id": 6, "segundos": 6, "expuestos": 262, "infectados": 0, "suceptibles": 926, "recuperados": 400, "total_muertos": 64, "total_poblacion": 1554 },
+{ "id": 7, "segundos": 6, "expuestos": 629, "infectados": 0, "suceptibles": 1892, "recuperados": 918, "total_muertos": 135, "total_poblacion": 3244 },
+{ "id": 8, "segundos": 6, "expuestos": 479, "infectados": 0, "suceptibles": 1615, "recuperados": 720, "total_muertos": 112, "total_poblacion": 2726 }
+], 
+[
+{ "id": 0, "segundos": 7, "expuestos": 0, "infectados": 1604, "suceptibles": 3137, "recuperados": 106, "total_muertos": 138, "total_poblacion": 4572 },
+{ "id": 1, "segundos": 7, "expuestos": 0, "infectados": 1282, "suceptibles": 2449, "recuperados": 63, "total_muertos": 106, "total_poblacion": 3559 },
+{ "id": 2, "segundos": 7, "expuestos": 0, "infectados": 908, "suceptibles": 1595, "recuperados": -7, "total_muertos": 66, "total_poblacion": 2292 },
+{ "id": 3, "segundos": 7, "expuestos": 0, "infectados": 1629, "suceptibles": 3236, "recuperados": 127, "total_muertos": 143, "total_poblacion": 4726 },
+{ "id": 4, "segundos": 7, "expuestos": 0, "infectados": 2110, "suceptibles": 3970, "recuperados": 81, "total_muertos": 171, "total_poblacion": 5757 },
+{ "id": 5, "segundos": 7, "expuestos": 0, "infectados": 1281, "suceptibles": 2343, "recuperados": 24, "total_muertos": 99, "total_poblacion": 3385 },
+{ "id": 6, "segundos": 7, "expuestos": 0, "infectados": 519, "suceptibles": 1033, "recuperados": 40, "total_muertos": 46, "total_poblacion": 1508 },
+{ "id": 7, "segundos": 7, "expuestos": 0, "infectados": 1230, "suceptibles": 2191, "recuperados": 0, "total_muertos": 92, "total_poblacion": 3152 },
+{ "id": 8, "segundos": 7, "expuestos": 0, "infectados": 945, "suceptibles": 1819, "recuperados": 52, "total_muertos": 80, "total_poblacion": 2646 }
+], 
+[
+{ "id": 0, "segundos": 8, "expuestos": 910, "infectados": 0, "suceptibles": 2500, "recuperados": 1301, "total_muertos": 186, "total_poblacion": 4386 },
+{ "id": 1, "segundos": 8, "expuestos": 731, "infectados": 0, "suceptibles": 1936, "recuperados": 1036, "total_muertos": 146, "total_poblacion": 3413 },
+{ "id": 2, "segundos": 8, "expuestos": 529, "infectados": 0, "suceptibles": 1222, "recuperados": 725, "total_muertos": 96, "total_poblacion": 2196 },
+{ "id": 3, "segundos": 8, "expuestos": 921, "infectados": 0, "suceptibles": 2593, "recuperados": 1324, "total_muertos": 191, "total_poblacion": 4535 },
+{ "id": 4, "segundos": 8, "expuestos": 1210, "infectados": 0, "suceptibles": 3122, "recuperados": 1701, "total_muertos": 236, "total_poblacion": 5521 },
+{ "id": 5, "segundos": 8, "expuestos": 739, "infectados": 0, "suceptibles": 1823, "recuperados": 1028, "total_muertos": 141, "total_poblacion": 3244 },
+{ "id": 6, "segundos": 8, "expuestos": 293, "infectados": 0, "suceptibles": 827, "recuperados": 422, "total_muertos": 61, "total_poblacion": 1447 },
+{ "id": 7, "segundos": 8, "expuestos": 715, "infectados": 0, "suceptibles": 1687, "recuperados": 984, "total_muertos": 131, "total_poblacion": 3021 },
+{ "id": 8, "segundos": 8, "expuestos": 538, "infectados": 0, "suceptibles": 1442, "recuperados": 764, "total_muertos": 109, "total_poblacion": 2537 }
+], 
+[
+{ "id": 0, "segundos": 9, "expuestos": 0, "infectados": 1774, "suceptibles": 2966, "recuperados": -38, "total_muertos": 121, "total_poblacion": 4265 },
+{ "id": 1, "segundos": 9, "expuestos": 0, "infectados": 1421, "suceptibles": 2319, "recuperados": -55, "total_muertos": 93, "total_poblacion": 3320 },
+{ "id": 2, "segundos": 9, "expuestos": 0, "infectados": 1018, "suceptibles": 1521, "recuperados": -100, "total_muertos": 57, "total_poblacion": 2139 },
+{ "id": 3, "segundos": 9, "expuestos": 0, "infectados": 1799, "suceptibles": 3056, "recuperados": -17, "total_muertos": 127, "total_poblacion": 4408 },
+{ "id": 4, "segundos": 9, "expuestos": 0, "infectados": 2348, "suceptibles": 3765, "recuperados": -120, "total_muertos": 149, "total_poblacion": 5372 },
+{ "id": 5, "segundos": 9, "expuestos": 0, "infectados": 1429, "suceptibles": 2226, "recuperados": -102, "total_muertos": 87, "total_poblacion": 3157 },
+{ "id": 6, "segundos": 9, "expuestos": 0, "infectados": 572, "suceptibles": 974, "recuperados": -4, "total_muertos": 41, "total_poblacion": 1406 },
+{ "id": 7, "segundos": 9, "expuestos": 0, "infectados": 1378, "suceptibles": 2086, "recuperados": -124, "total_muertos": 80, "total_poblacion": 2941 },
+{ "id": 8, "segundos": 9, "expuestos": 0, "infectados": 1047, "suceptibles": 1721, "recuperados": -35, "total_muertos": 69, "total_poblacion": 2468 }
+], 
+[
+{ "id": 0, "segundos": 10, "expuestos": 1043, "infectados": 0, "suceptibles": 2253, "recuperados": 1412, "total_muertos": 182, "total_poblacion": 4083 },
+{ "id": 1, "segundos": 10, "expuestos": 839, "infectados": 0, "suceptibles": 1741, "recuperados": 1127, "total_muertos": 144, "total_poblacion": 3176 },
+{ "id": 2, "segundos": 10, "expuestos": 613, "infectados": 0, "suceptibles": 1091, "recuperados": 797, "total_muertos": 95, "total_poblacion": 2044 },
+{ "id": 3, "segundos": 10, "expuestos": 1054, "infectados": 0, "suceptibles": 2339, "recuperados": 1436, "total_muertos": 187, "total_poblacion": 4221 },
+{ "id": 4, "segundos": 10, "expuestos": 1392, "infectados": 0, "suceptibles": 2803, "recuperados": 1858, "total_muertos": 232, "total_poblacion": 5140 },
+{ "id": 5, "segundos": 10, "expuestos": 853, "infectados": 0, "suceptibles": 1632, "recuperados": 1125, "total_muertos": 138, "total_poblacion": 3019 },
+{ "id": 6, "segundos": 10, "expuestos": 334, "infectados": 0, "suceptibles": 747, "recuperados": 456, "total_muertos": 60, "total_poblacion": 1346 },
+{ "id": 7, "segundos": 10, "expuestos": 828, "infectados": 0, "suceptibles": 1507, "recuperados": 1081, "total_muertos": 130, "total_poblacion": 2811 },
+{ "id": 8, "segundos": 10, "expuestos": 617, "infectados": 0, "suceptibles": 1297, "recuperados": 831, "total_muertos": 106, "total_poblacion": 2362 }
+], 
+[
+{ "id": 0, "segundos": 11, "expuestos": 0, "infectados": 1998, "suceptibles": 2864, "recuperados": -259, "total_muertos": 103, "total_poblacion": 3980 },
+{ "id": 1, "segundos": 11, "expuestos": 0, "infectados": 1603, "suceptibles": 2242, "recuperados": -233, "total_muertos": 79, "total_poblacion": 3097 },
+{ "id": 2, "segundos": 11, "expuestos": 0, "infectados": 1162, "suceptibles": 1477, "recuperados": -230, "total_muertos": 48, "total_poblacion": 1996 },
+{ "id": 3, "segundos": 11, "expuestos": 0, "infectados": 2022, "suceptibles": 2950, "recuperados": -242, "total_muertos": 108, "total_poblacion": 4113 },
+{ "id": 4, "segundos": 11, "expuestos": 0, "infectados": 2656, "suceptibles": 3645, "recuperados": -414, "total_muertos": 126, "total_poblacion": 5014 },
+{ "id": 5, "segundos": 11, "expuestos": 0, "infectados": 1623, "suceptibles": 2156, "recuperados": -281, "total_muertos": 73, "total_poblacion": 2946 },
+{ "id": 6, "segundos": 11, "expuestos": 0, "infectados": 641, "suceptibles": 940, "recuperados": -75, "total_muertos": 34, "total_poblacion": 1312 },
+{ "id": 7, "segundos": 11, "expuestos": 0, "infectados": 1571, "suceptibles": 2025, "recuperados": -300, "total_muertos": 66, "total_poblacion": 2745 },
+{ "id": 8, "segundos": 11, "expuestos": 0, "infectados": 1180, "suceptibles": 1663, "recuperados": -165, "total_muertos": 60, "total_poblacion": 2302 }
+], 
+[
+{ "id": 0, "segundos": 12, "expuestos": 1214, "infectados": 0, "suceptibles": 1998, "recuperados": 1554, "total_muertos": 180, "total_poblacion": 3800 },
+{ "id": 1, "segundos": 12, "expuestos": 978, "infectados": 0, "suceptibles": 1540, "recuperados": 1242, "total_muertos": 142, "total_poblacion": 2955 },
+{ "id": 2, "segundos": 12, "expuestos": 720, "infectados": 0, "suceptibles": 953, "recuperados": 890, "total_muertos": 96, "total_poblacion": 1900 },
+{ "id": 3, "segundos": 12, "expuestos": 1225, "infectados": 0, "suceptibles": 2078, "recuperados": 1576, "total_muertos": 184, "total_poblacion": 3929 },
+{ "id": 4, "segundos": 12, "expuestos": 1628, "infectados": 0, "suceptibles": 2475, "recuperados": 2054, "total_muertos": 231, "total_poblacion": 4783 },
+{ "id": 5, "segundos": 12, "expuestos": 999, "infectados": 0, "suceptibles": 1435, "recuperados": 1250, "total_muertos": 138, "total_poblacion": 2808 },
+{ "id": 6, "segundos": 12, "expuestos": 387, "infectados": 0, "suceptibles": 664, "recuperados": 500, "total_muertos": 59, "total_poblacion": 1253 },
+{ "id": 7, "segundos": 12, "expuestos": 972, "infectados": 0, "suceptibles": 1319, "recuperados": 1205, "total_muertos": 131, "total_poblacion": 2614 },
+{ "id": 8, "segundos": 12, "expuestos": 719, "infectados": 0, "suceptibles": 1148, "recuperados": 915, "total_muertos": 106, "total_poblacion": 2196 }
+], 
+[
+{ "id": 0, "segundos": 13, "expuestos": 0, "infectados": 2292, "suceptibles": 2781, "recuperados": -508, "total_muertos": 85, "total_poblacion": 3715 },
+{ "id": 1, "segundos": 13, "expuestos": 0, "infectados": 1843, "suceptibles": 2179, "recuperados": -432, "total_muertos": 64, "total_poblacion": 2891 },
+{ "id": 2, "segundos": 13, "expuestos": 0, "infectados": 1347, "suceptibles": 1446, "recuperados": -379, "total_muertos": 37, "total_poblacion": 1863 },
+{ "id": 3, "segundos": 13, "expuestos": 0, "infectados": 2317, "suceptibles": 2861, "recuperados": -492, "total_muertos": 89, "total_poblacion": 3840 },
+{ "id": 4, "segundos": 13, "expuestos": 0, "infectados": 3063, "suceptibles": 3549, "recuperados": -750, "total_muertos": 102, "total_poblacion": 4681 },
+{ "id": 5, "segundos": 13, "expuestos": 0, "infectados": 1875, "suceptibles": 2105, "recuperados": -488, "total_muertos": 57, "total_poblacion": 2751 },
+{ "id": 6, "segundos": 13, "expuestos": 0, "infectados": 732, "suceptibles": 911, "recuperados": -153, "total_muertos": 28, "total_poblacion": 1225 },
+{ "id": 7, "segundos": 13, "expuestos": 0, "infectados": 1820, "suceptibles": 1979, "recuperados": -500, "total_muertos": 52, "total_poblacion": 2562 },
+{ "id": 8, "segundos": 13, "expuestos": 0, "infectados": 1355, "suceptibles": 1616, "recuperados": -313, "total_muertos": 48, "total_poblacion": 2148 }
+], 
+[
+{ "id": 0, "segundos": 14, "expuestos": 1431, "infectados": 0, "suceptibles": 1735, "recuperados": 1747, "total_muertos": 181, "total_poblacion": 3534 },
+{ "id": 1, "segundos": 14, "expuestos": 1155, "infectados": 0, "suceptibles": 1332, "recuperados": 1400, "total_muertos": 143, "total_poblacion": 2748 },
+{ "id": 2, "segundos": 14, "expuestos": 856, "infectados": 0, "suceptibles": 810, "recuperados": 1013, "total_muertos": 97, "total_poblacion": 1766 },
+{ "id": 3, "segundos": 14, "expuestos": 1443, "infectados": 0, "suceptibles": 1809, "recuperados": 1769, "total_muertos": 186, "total_poblacion": 3654 },
+{ "id": 4, "segundos": 14, "expuestos": 1926, "infectados": 0, "suceptibles": 2133, "recuperados": 2322, "total_muertos": 233, "total_poblacion": 4448 },
+{ "id": 5, "segundos": 14, "expuestos": 1184, "infectados": 0, "suceptibles": 1230, "recuperados": 1417, "total_muertos": 139, "total_poblacion": 2612 },
+{ "id": 6, "segundos": 14, "expuestos": 455, "infectados": 0, "suceptibles": 579, "recuperados": 559, "total_muertos": 59, "total_poblacion": 1166 },
+{ "id": 7, "segundos": 14, "expuestos": 1154, "infectados": 0, "suceptibles": 1124, "recuperados": 1371, "total_muertos": 132, "total_poblacion": 2430 },
+{ "id": 8, "segundos": 14, "expuestos": 848, "infectados": 0, "suceptibles": 994, "recuperados": 1030, "total_muertos": 106, "total_poblacion": 2042 }
+], 
+[
+{ "id": 0, "segundos": 15, "expuestos": 0, "infectados": 2668, "suceptibles": 2733, "recuperados": -806, "total_muertos": 65, "total_poblacion": 3469 },
+{ "id": 1, "segundos": 15, "expuestos": 0, "infectados": 2150, "suceptibles": 2145, "recuperados": -673, "total_muertos": 49, "total_poblacion": 2699 },
+{ "id": 2, "segundos": 15, "expuestos": 0, "infectados": 1584, "suceptibles": 1434, "recuperados": -558, "total_muertos": 25, "total_poblacion": 1741 },
+{ "id": 3, "segundos": 15, "expuestos": 0, "infectados": 2694, "suceptibles": 2808, "recuperados": -792, "total_muertos": 68, "total_poblacion": 3586 },
+{ "id": 4, "segundos": 15, "expuestos": 0, "infectados": 3581, "suceptibles": 3500, "recuperados": -1151, "total_muertos": 75, "total_poblacion": 4373 },
+{ "id": 5, "segundos": 15, "expuestos": 0, "infectados": 2197, "suceptibles": 2081, "recuperados": -734, "total_muertos": 41, "total_poblacion": 2571 },
+{ "id": 6, "segundos": 15, "expuestos": 0, "infectados": 850, "suceptibles": 893, "recuperados": -246, "total_muertos": 21, "total_poblacion": 1145 },
+{ "id": 7, "segundos": 15, "expuestos": 0, "infectados": 2137, "suceptibles": 1962, "recuperados": -742, "total_muertos": 36, "total_poblacion": 2394 },
+{ "id": 8, "segundos": 15, "expuestos": 0, "infectados": 1579, "suceptibles": 1589, "recuperados": -488, "total_muertos": 36, "total_poblacion": 2006 }
+], 
+[
+{ "id": 0, "segundos": 16, "expuestos": 1706, "infectados": 0, "suceptibles": 1459, "recuperados": 1997, "total_muertos": 185, "total_poblacion": 3284 },
+{ "id": 1, "segundos": 16, "expuestos": 1379, "infectados": 0, "suceptibles": 1113, "recuperados": 1605, "total_muertos": 147, "total_poblacion": 2552 },
+{ "id": 2, "segundos": 16, "expuestos": 1027, "infectados": 0, "suceptibles": 658, "recuperados": 1172, "total_muertos": 100, "total_poblacion": 1641 },
+{ "id": 3, "segundos": 16, "expuestos": 1719, "infectados": 0, "suceptibles": 1528, "recuperados": 2020, "total_muertos": 189, "total_poblacion": 3397 },
+{ "id": 4, "segundos": 16, "expuestos": 2303, "infectados": 0, "suceptibles": 1774, "recuperados": 2669, "total_muertos": 239, "total_poblacion": 4134 },
+{ "id": 5, "segundos": 16, "expuestos": 1418, "infectados": 0, "suceptibles": 1015, "recuperados": 1632, "total_muertos": 144, "total_poblacion": 2427 },
+{ "id": 6, "segundos": 16, "expuestos": 541, "infectados": 0, "suceptibles": 491, "recuperados": 638, "total_muertos": 60, "total_poblacion": 1085 },
+{ "id": 7, "segundos": 16, "expuestos": 1384, "infectados": 0, "suceptibles": 917, "recuperados": 1583, "total_muertos": 136, "total_poblacion": 2258 },
+{ "id": 8, "segundos": 16, "expuestos": 1012, "infectados": 0, "suceptibles": 833, "recuperados": 1180, "total_muertos": 107, "total_poblacion": 1899 }
+], 
+[
+{ "id": 0, "segundos": 17, "expuestos": 0, "infectados": 3149, "suceptibles": 2721, "recuperados": -1162, "total_muertos": 41, "total_poblacion": 3243 },
+{ "id": 1, "segundos": 17, "expuestos": 0, "infectados": 2541, "suceptibles": 2141, "recuperados": -963, "total_muertos": 30, "total_poblacion": 2522 },
+{ "id": 2, "segundos": 17, "expuestos": 0, "infectados": 1883, "suceptibles": 1444, "recuperados": -773, "total_muertos": 13, "total_poblacion": 1628 },
+{ "id": 3, "segundos": 17, "expuestos": 0, "infectados": 3176, "suceptibles": 2792, "recuperados": -1152, "total_muertos": 45, "total_poblacion": 3352 },
+{ "id": 4, "segundos": 17, "expuestos": 0, "infectados": 4240, "suceptibles": 3501, "recuperados": -1635, "total_muertos": 45, "total_poblacion": 4089 },
+{ "id": 5, "segundos": 17, "expuestos": 0, "infectados": 2606, "suceptibles": 2087, "recuperados": -1032, "total_muertos": 23, "total_poblacion": 2404 },
+{ "id": 6, "segundos": 17, "expuestos": 0, "infectados": 1000, "suceptibles": 888, "recuperados": -359, "total_muertos": 15, "total_poblacion": 1070 },
+{ "id": 7, "segundos": 17, "expuestos": 0, "infectados": 2540, "suceptibles": 1972, "recuperados": -1031, "total_muertos": 19, "total_poblacion": 2239 },
+{ "id": 8, "segundos": 17, "expuestos": 0, "infectados": 1866, "suceptibles": 1585, "recuperados": -700, "total_muertos": 23, "total_poblacion": 1876 }
+], 
+[
+{ "id": 0, "segundos": 18, "expuestos": 2053, "infectados": 0, "suceptibles": 1165, "recuperados": 2321, "total_muertos": 193, "total_poblacion": 3050 },
+{ "id": 1, "segundos": 18, "expuestos": 1661, "infectados": 0, "suceptibles": 878, "recuperados": 1869, "total_muertos": 152, "total_poblacion": 2370 },
+{ "id": 2, "segundos": 18, "expuestos": 1242, "infectados": 0, "suceptibles": 493, "recuperados": 1374, "total_muertos": 107, "total_poblacion": 1521 },
+{ "id": 3, "segundos": 18, "expuestos": 2066, "infectados": 0, "suceptibles": 1228, "recuperados": 2344, "total_muertos": 197, "total_poblacion": 3155 },
+{ "id": 4, "segundos": 18, "expuestos": 2777, "infectados": 0, "suceptibles": 1388, "recuperados": 3114, "total_muertos": 250, "total_poblacion": 3839 },
+{ "id": 5, "segundos": 18, "expuestos": 1712, "infectados": 0, "suceptibles": 781, "recuperados": 1909, "total_muertos": 151, "total_poblacion": 2253 },
+{ "id": 6, "segundos": 18, "expuestos": 650, "infectados": 0, "suceptibles": 396, "recuperados": 738, "total_muertos": 64, "total_poblacion": 1006 },
+{ "id": 7, "segundos": 18, "expuestos": 1673, "infectados": 0, "suceptibles": 693, "recuperados": 1856, "total_muertos": 145, "total_poblacion": 2094 },
+{ "id": 8, "segundos": 18, "expuestos": 1218, "infectados": 0, "suceptibles": 660, "recuperados": 1373, "total_muertos": 113, "total_poblacion": 1763 }
+], 
+[
+{ "id": 0, "segundos": 19, "expuestos": 0, "infectados": 3757, "suceptibles": 2754, "recuperados": -1596, "total_muertos": 16, "total_poblacion": 3034 },
+{ "id": 1, "segundos": 19, "expuestos": 0, "infectados": 3036, "suceptibles": 2171, "recuperados": -1312, "total_muertos": 10, "total_poblacion": 2360 },
+{ "id": 2, "segundos": 19, "expuestos": 0, "infectados": 2261, "suceptibles": 1479, "recuperados": -1036, "total_muertos": -3, "total_poblacion": 1524 },
+{ "id": 3, "segundos": 19, "expuestos": 0, "infectados": 3784, "suceptibles": 2821, "recuperados": -1587, "total_muertos": 19, "total_poblacion": 3136 },
+{ "id": 4, "segundos": 19, "expuestos": 0, "infectados": 5072, "suceptibles": 3560, "recuperados": -2222, "total_muertos": 11, "total_poblacion": 3828 },
+{ "id": 5, "segundos": 19, "expuestos": 0, "infectados": 3123, "suceptibles": 2128, "recuperados": -1394, "total_muertos": 3, "total_poblacion": 2250 },
+{ "id": 6, "segundos": 19, "expuestos": 0, "infectados": 1191, "suceptibles": 895, "recuperados": -496, "total_muertos": 6, "total_poblacion": 1000 },
+{ "id": 7, "segundos": 19, "expuestos": 0, "infectados": 3048, "suceptibles": 2018, "recuperados": -1386, "total_muertos": -2, "total_poblacion": 2096 },
+{ "id": 8, "segundos": 19, "expuestos": 0, "infectados": 2227, "suceptibles": 1606, "recuperados": -956, "total_muertos": 8, "total_poblacion": 1755 }
+]
+]
+}

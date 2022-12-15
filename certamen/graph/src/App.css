@@ -1,0 +1,54 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  gap: 1rem;
+}
+
+.grilla {
+  border: 1px solid #000;
+}
+
+.fila {
+  display: flex;
+}
+
+.vecindad {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #000;
+  transition: 0.2s all;
+}
+
+.vecindad:hover {
+  background-color: rgba(0, 0, 0, 0.127) !important;
+  cursor: pointer;
+}
+
+.botones {
+  display: flex;
+  gap: 1rem;
+}
+
+.graficos {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(49%, 1fr));
+  grid-template-rows: repeat(3, 300px);
+  column-gap: 2%;
+  row-gap: 1rem;
+  padding: 2rem;
+}
+
+.graficos > canvas {
+  border: 1px solid #000;
+}
+
+.grafico {
+  height: 100% !important;
+  width: 100% !important;
+}

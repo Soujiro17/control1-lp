@@ -90,6 +90,16 @@ public:
         total_muertos = 0;
     }
 
+    area(){
+        infectados = 10000;
+        suceptibles = 1000;
+        expuestos = 0;
+        recuperados = 0;
+        total_poblacion = infectados + suceptibles + expuestos + recuperados;
+        total_poblacion_anterior = total_poblacion; 
+        total_muertos = 0;
+    }
+
     // Setter
     void set_total_poblacion()
     {
@@ -167,19 +177,21 @@ public:
 
 void start(int infectados, int suceptibles, int expuestos, int recuperados){
 
-  area *  areas[20][20];
-  FILE *data_TXT = NULL;
-  FILE *gnupipe = NULL;
-  char rects[150];
-  char plot[100];
-  int count = 1;
-  int countVecindad = 0;
-  long int randomInf, randomSuc, randomExp, randomRec, infectadosObtenidos;
+  area areas[20][20];
+  long int randomInf, randomSuc, randomExp, randomRec;
+  FILE *data = NULL;
+  int count = 0;
+  // FILE *gnupipe = NULL;
+  // char rects[150];
+  // char plot[100];
+  // int countVecindad = 1;
+  // area *izquierda, *derecha, *arriba, *abajo;
 
-  sprintf(plot, "plot [0:%i] [0:%i] 'data.txt' using 1:2 with lines lw 8\n", filas, columnas);
+  // sprintf(plot, "plot [0:%i] [0:%i] 'data.txt' using 1:2 with lines lw 8\n", filas, columnas);
 
-  data_TXT = fopen("data.txt", "w");
-  gnupipe = popen("gnuplot -persistent", "w");
+  data = fopen("./graph/src/data.json", "w");
+  // gnupipe = popen("gnuplot -persistent", "w");
+
 
   for(int i = 0; i<filas; i++){
     for(int j = 0; j<columnas; j++){
@@ -188,66 +200,89 @@ void start(int infectados, int suceptibles, int expuestos, int recuperados){
       randomExp = randNum(0, expuestos);
       randomRec = randNum(0, recuperados);
 
-      // printf("randomInf: %li - randomSuc: %li - randomExp: %li - randomRec: %li\n", randomInf, randomSuc, randomExp, randomRec);
-
       area nuevaArea(randomInf, randomSuc, randomExp, randomRec);
 
-      nuevaArea.avance_enfermedad();
-
-      // printf("nuevaAreaInf: %li - nuevaAreaSuc: %li - nuevaAreaExp: %li - nuevaAreaRec: %li\n", nuevaArea.infectados, nuevaArea.suceptibles, nuevaArea.expuestos, nuevaArea.recuperados);
-      areas[i][j] = &nuevaArea;
+      areas[i][j] = nuevaArea;
     }
   }
 
-  for(int i = 0; i<filas; i+=1){
-    for(int j = 0; j<columnas; j+=1){
-      sprintf(rects, "set object %i rect from %i.00000, %i.00000 to %i.00000, %i.00000", count, i, j, i+1, j+1);
-      fprintf(gnupipe, "%s\n", rects);
-      sprintf(rects, "set object %i front clip lw 1.0  dashtype solid fc  rgb \"%s\"  fillstyle   solid 1.00 border lt -1", count, colores[count-1]);
-      fprintf(gnupipe, "%s\n", rects);
-      count++;
-    }
-    count++;
-  }
+  int segundos = 20;
 
-  for(int i = 0; i <  50; i += 1){
-    countVecindad = 0;
-    fprintf(data_TXT, "%i %i\n", i, i);
-    fflush(data_TXT);
+  fprintf(data, "%s\n", "{");
+  fprintf(data, "\"filas\": %i,\n\"columnas\": %i,\n\"segundos\": %i,\n", filas, columnas, segundos);
+  fprintf(data, "%s\n", "\"data\": [");
 
-    fprintf(gnupipe, "%s\n", plot);
-    fflush(gnupipe);
 
+  for(int s = 0; s<segundos; s++){
+    fprintf(data, "%s\n", "[");
+    count = 0;
     for(int i = 0; i<filas; i++){
       for(int j = 0; j<columnas; j++){
-        
-        // printf("areaInf: %li - areaSuc: %li - areaExp: %li - areaRec: %li\n", (*areas[i][j]).infectados, (*areas[i][j]).suceptibles, (*areas[i][j]).expuestos, (*areas[i][j]).recuperados);
-
-        infectadosObtenidos = (*areas[i][j]).avance_enfermedad();
-        printf("Infectados obtenidos: %li\n", infectadosObtenidos);
-
-        // if(i+1 < filas && j+1 < columnas){
-        //   printf("Infectados obtenidos: %li - Infectados casilla arriba: %li\n", infectadosObtenidos, (*areas[i+1][j+1]).infectados);
-        // }
-
-
-        // if(infectadosObtenidos > (*areas[i+1][j]).infectados){
-        //   sprintf(rects, "set object %i front clip lw 1.0  dashtype solid fc  rgb \"%s\"  fillstyle   solid 1.00 border lt -1", countVecindad+1, colores[count-1]);
-        //   fprintf(gnupipe, "%s\n", rects);
-        // }
-
-        (*areas[i][j]).set_total_poblacion();
-        countVecindad++;
+        areas[i][j].avance_enfermedad();
+        if(j+1 == columnas && i+1 == filas){
+          fprintf(data, "{ \"id\": %i, \"segundos\": %i, \"expuestos\": %li, \"infectados\": %li, \"suceptibles\": %li, \"recuperados\": %li, \"total_muertos\": %li, \"total_poblacion\": %li }\n", count, s, areas[i][j].expuestos < 0? 0 : areas[i][j].expuestos, areas[i][j].infectados < 0? 0 : areas[i][j].infectados, areas[i][j].suceptibles, areas[i][j].recuperados, areas[i][j].total_muertos, areas[i][j].total_poblacion);
+        }else{
+          fprintf(data, "{ \"id\": %i, \"segundos\": %i, \"expuestos\": %li, \"infectados\": %li, \"suceptibles\": %li, \"recuperados\": %li, \"total_muertos\": %li, \"total_poblacion\": %li },\n", count, s, areas[i][j].expuestos < 0? 0 : areas[i][j].expuestos, areas[i][j].infectados < 0? 0 : areas[i][j].infectados, areas[i][j].suceptibles, areas[i][j].recuperados, areas[i][j].total_muertos, areas[i][j].total_poblacion);
+        }
+        count++;
+        areas[i][j].set_total_poblacion();
       }
-      countVecindad++;
     }
 
-    sleep(2);
-    printf("\n\nSegundo %i\n", 2+ (2*i));
-    // fprintf(gnupipe, "%s\n", GnuCommands[i]);
-  }
+    if(s + 1 == segundos){
+      fprintf(data, "%s\n", "]");
+    }else{
+      fprintf(data, "%s\n", "], ");
+    }
 
-  fclose(data_TXT);
+    sleep(1);
+    printf("Segundo %i\n", s);
+  }
+  printf("Fin ejecución\n");
+
+  fprintf(data, "%s\n", "]");
+
+  fprintf(data, "%s\n", "}");
+  fclose(data);
+  // for(int k = 0; k <  50; k += 1){
+
+    // countVecindad = 0;
+    // fprintf(data_TXT, "%i %i\n", k, k);
+    // fflush(data_TXT);
+
+    // for(int i = filas - 1; i>=0; i--){
+    //   for(int j = 0; j<columnas; j++){
+        
+    //     infectadosObtenidos = areas[i][j].avance_enfermedad();
+
+    //     // if(i+1 >= filas || j+1 >= columnas) continue;
+    //     sprintf(rects, "set object %i rect from %i.00000, %i.00000 to %i.00000, %i.00000", countVecindad + 1, i, j, i+1, j+1);
+    //     fprintf(gnupipe, "%s\n", rects);
+
+    //     if(j != 0){
+    //       if(areas[0][j+1].infectados < infectadosObtenidos){ // Derecha
+    //         printf("Infectados obtenidos: %li - Infectados casilla arriba: %li\n", infectadosObtenidos, areas[i][j+1].infectados);
+    //         sprintf(rects, "set object %i front clip lw 1.0  dashtype solid fc  rgb \"%s\"  fillstyle   solid 1.00 border lt -1", countVecindad+1, "#f00");
+    //         fprintf(gnupipe, "%s\n", rects);
+    //       }
+    //     }
+
+
+    //     areas[i][j].set_total_poblacion();
+
+    //     countVecindad++;
+    //   }
+    //   countVecindad++;
+    // }
+
+    // fprintf(gnupipe, "%s\n", plot);
+    // fflush(gnupipe);
+
+    // sleep(1);
+    // printf("Segundo %i\n", k);
+    // fprintf(gnupipe, "%s\n", GnuCommands[i]);
+
+  // fclose(data_TXT);
 
 }
 
